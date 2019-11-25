@@ -1,0 +1,1479 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<link rel="manifest" href="/manifest.json">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=6.6.0" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/VK.png?v=6.6.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon32.png?v=6.6.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon16.png?v=6.6.0">
+
+
+  <link rel="mask-icon" href="/images/VK.svg?v=6.6.0" color="#222">
+
+
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '6.6.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="单例模式12345678910 var person = &amp;#123;	name : &quot;Tom&quot;,	age: 12&amp;#125;var person1 = &amp;#123;	name : &quot;toony&quot;,	age : &quot;11&quot;&amp;#125; 这就是单例模式  作用： 实现分组，把描述同一个事物的属性和方法放在了同一个空间中，起到了分组的作用，避免了相同变量名之间的干扰 在单例模式中，我们把对象名叫命名空间">
+<meta name="keywords" content="JavaScript,前端开发,设计模式">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JavaScript中的几种设计模式">
+<meta property="og:url" content="http://yoursite.com/2018/12/16/2018-12-16-inherit-in-javascript/index.html">
+<meta property="og:site_name" content="VK Blog | 高闻灿的博客">
+<meta property="og:description" content="单例模式12345678910 var person = &amp;#123;	name : &quot;Tom&quot;,	age: 12&amp;#125;var person1 = &amp;#123;	name : &quot;toony&quot;,	age : &quot;11&quot;&amp;#125; 这就是单例模式  作用： 实现分组，把描述同一个事物的属性和方法放在了同一个空间中，起到了分组的作用，避免了相同变量名之间的干扰 在单例模式中，我们把对象名叫命名空间">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/6f9f3683ly1fy8tozcht2j21510m415m.jpg">
+<meta property="og:updated_time" content="2018-12-17T03:47:27.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JavaScript中的几种设计模式">
+<meta name="twitter:description" content="单例模式12345678910 var person = &amp;#123;	name : &quot;Tom&quot;,	age: 12&amp;#125;var person1 = &amp;#123;	name : &quot;toony&quot;,	age : &quot;11&quot;&amp;#125; 这就是单例模式  作用： 实现分组，把描述同一个事物的属性和方法放在了同一个空间中，起到了分组的作用，避免了相同变量名之间的干扰 在单例模式中，我们把对象名叫命名空间">
+<meta name="twitter:image" content="http://ww1.sinaimg.cn/large/6f9f3683ly1fy8tozcht2j21510m415m.jpg">
+
+
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/12/16/2018-12-16-inherit-in-javascript/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>JavaScript中的几种设计模式 | VK Blog | 高闻灿的博客</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion .logo-line-before i { left: initial; }
+    .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">VK Blog | 高闻灿的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">一个浪漫 | 有情调 | 文艺の | 小Coder</p>
+      
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>搜索</a>
+        </li>
+      
+    </ul>
+  
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+  
+  
+  
+  
+
+  
+
+    <a href="https://github.com/forrany" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewbox="0 0 250 250" style="fill: #222; color: #fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"/><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"/><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"/></svg></a>
+
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/16/2018-12-16-inherit-in-javascript/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Vincent Ko">
+      <meta itemprop="description" content="忧绪相伴，在浪漫的气息中回忆过去，敲着代码">
+      <meta itemprop="image" content="/images/taka.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="VK Blog | 高闻灿的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">JavaScript中的几种设计模式
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-12-16 12:00:00" itemprop="dateCreated datePublished" datetime="2018-12-16T12:00:00+08:00">2018-12-16</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2018-12-17 11:47:27" itemprop="dateModified" datetime="2018-12-17T11:47:27+08:00">2018-12-17</time>
+              
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/12/16/2018-12-16-inherit-in-javascript/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/12/16/2018-12-16-inherit-in-javascript/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                <span title="本文字数">4.7k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                <span title="阅读时长">9 分钟</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="单例模式"><a href="#单例模式" class="headerlink" title="单例模式"></a>单例模式</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"> </span><br><span class="line"><span class="keyword">var</span> person = &#123;</span><br><span class="line">	name : <span class="string">"Tom"</span>,</span><br><span class="line">	age: <span class="number">12</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> person1 = &#123;</span><br><span class="line">	name : <span class="string">"toony"</span>,</span><br><span class="line">	age : <span class="string">"11"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这就是单例模式</p>
+<ul>
+<li>作用： 实现分组，把描述同一个事物的属性和方法放在了同一个空间中，起到了分组的作用，避免了相同变量名之间的干扰</li>
+<li>在单例模式中，我们把对象名叫<strong>命名空间</strong></li>
+<li>单例模式是我们项目中常用的模式，因为可以利用它进行模块化开发。</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//同样都用change方法，为了避免污染</span></span><br><span class="line"><span class="keyword">var</span> sideBar = &#123;</span><br><span class="line">	change : <span class="function"><span class="keyword">function</span> (<span class="params"></span>)</span>&#123;&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> headBar = &#123;</span><br><span class="line">	change : <span class="function"><span class="keyword">function</span> (<span class="params"></span>)</span>&#123;&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="工厂模式"><a href="#工厂模式" class="headerlink" title="工厂模式"></a>工厂模式</h2><p>为了实现”低冗余，高聚合“的方式，为了批量生产，于是有了工厂模式。 </p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">creatPerson</span>(<span class="params">name,age</span>)</span>&#123;</span><br><span class="line">	<span class="keyword">var</span> obj = &#123;&#125;;</span><br><span class="line">	obj.name = name;</span><br><span class="line">	obj.age = age;</span><br><span class="line">	obj.writeJs = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">		<span class="built_in">console</span>.log(<span class="string">'ha'</span> + obj.name + <span class="string">'can write JS'</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> obj;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>于是，不用像单例模式那样，进行多次的重复的写内容了</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> person1 = creatPerson(<span class="string">"tom"</span>,<span class="number">15</span>);</span><br><span class="line"><span class="keyword">var</span> person2 = creatPerson(<span class="string">"tony"</span>,<span class="number">22</span>);</span><br></pre></td></tr></table></figure>
+<p><strong>特点</strong>：</p>
+<ol>
+<li>把实现相同功能的代码放到一个函数中，以后再想实现这个功能，不需要重新编写代码，只要运行代码即可   &gt;&gt;&gt;我们把这个叫<strong>函数的封装</strong>    ==低耦合，高内聚==</li>
+</ol>
+<h3 id="面向对象的编程语言"><a href="#面向对象的编程语言" class="headerlink" title="面向对象的编程语言"></a>面向对象的编程语言</h3><ul>
+<li>封装   封装已经实现，就是函数</li>
+<li>继承   通过原型链实现</li>
+<li>多态   当前方法和类的多种姿态，包括 重载和重写</li>
+</ul>
+<h4 id="多态之重载"><a href="#多态之重载" class="headerlink" title="多态之重载"></a>多态之重载</h4><p>方法名相同，参数类型、个数不同。<br>但是，JS中没有重载，因为当重复写的时候，会被覆盖</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">sum</span> (<span class="params">num,num</span>)</span>&#123;&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">sum</span> (<span class="params">num</span>) </span>&#123;&#125;</span><br></pre></td></tr></table></figure>
+<p>这是不行的，因此JS是没有重载的(overload)！！<br>但是可以通过if语句判断，来模拟实现重载(overload)<br><strong>但是JS有多态，因为有重写</strong></p>
+<h3 id="构造函数模式"><a href="#构造函数模式" class="headerlink" title="构造函数模式"></a>构造函数模式</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">CreatPerson</span> (<span class="params">name,age</span>) </span>&#123;</span><br><span class="line">	<span class="keyword">this</span>.name = name;</span><br><span class="line">	<span class="keyword">this</span>.age = age;</span><br><span class="line">	<span class="keyword">this</span>.writeJs = <span class="function"><span class="keyword">function</span> (<span class="params"></span>)</span>&#123;</span><br><span class="line">		<span class="built_in">console</span>.log(<span class="string">"my name is "</span> + <span class="keyword">this</span>.name + <span class="string">"I can write JS"</span>); </span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> tom = CreatPerson(<span class="string">"tom"</span>,<span class="number">12</span>);</span><br></pre></td></tr></table></figure>
+<p>这就是构造函数设计模式，注意方面里面的this是在调用的时候，才知道指向谁； 而前面的属性上的this，则是在构造函数时，指向实例。 因为构造函数，遇到new 的时候，会自己创建一个this对象，最后再自动返回this对象。</p>
+<p>这种，在内建对象中，也有类似的模式，比如创建数组：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> arr = [];</span><br><span class="line"><span class="keyword">var</span> arr1 = <span class="keyword">new</span> <span class="built_in">Array</span>();</span><br></pre></td></tr></table></figure></p>
+<p>不管哪组方式，arr都是 Array的实例。<br>但是注意： 不同实例的方法虽然名称相同，但是是不同的东西，那是各自实例的私有属性，单独的个体。</p>
+<h4 id="这个不是单例模式，而是构造函数模式"><a href="#这个不是单例模式，而是构造函数模式" class="headerlink" title="这个不是单例模式，而是构造函数模式"></a>这个不是单例模式，而是构造函数模式</h4><p>有的时候，面试官认为这个是单例模式，实际上，这并不是，这个是构造函数模式，也创造了单独的对象，但是在W3C中是可以查询的！</p>
+<ol>
+<li><p>JS中，所有类都是函数数据类型的，它与函数没有很大的区别。只不过在new的时候，会自动创建一个this对象，最后再自动返回。 (注意，实例都是object类型)</p>
+</li>
+<li><p>构造函数中，this.xxx中的this都是指向实例本身。 在方法中，this需要等待调用才有所指代</p>
+</li>
+<li><p>p1和p2中都是同一个类的实力，都有相同的方法，但是那是私有属性，是单独个体，不相等。</p>
+</li>
+</ol>
+<h4 id="还有一些特点-扩展"><a href="#还有一些特点-扩展" class="headerlink" title="还有一些特点(扩展)"></a>还有一些特点(扩展)</h4><ul>
+<li>var p1 = new CreatPerson 在构造函数中，如果没有参数，括号可以省略.  但是函数执行是不可以省略的</li>
+<li>如果提前return了一个对象，则会返回新的对象；如果返回一个基本数据类型，则没有任何影响</li>
+<li>测一个实例是否是一个类的实力  <code>instanceof</code>  </li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(p1 <span class="keyword">instanceof</span> CreatPerson);  <span class="comment">//true</span></span><br><span class="line"><span class="built_in">console</span>.log(p1 <span class="keyword">instanceof</span>(CreatPerson)); <span class="comment">//true</span></span><br><span class="line"><span class="built_in">console</span>.log(p1 <span class="keyword">instanceof</span> <span class="built_in">Array</span>) ;  <span class="comment">//false</span></span><br><span class="line"><span class="built_in">console</span>.log(p1 <span class="keyword">instanceof</span> <span class="built_in">Object</span>) ; <span class="comment">//true</span></span><br></pre></td></tr></table></figure>
+<p>检测数据类型来说，typeof不能准确检测Array的具体类型(只能返回object)。 可以使用<code>istanceof</code></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> arr = [];</span><br><span class="line"><span class="built_in">console</span>.log(arr istanceof <span class="built_in">Array</span>);  <span class="comment">//true</span></span><br><span class="line"><span class="comment">//也可以使用Object下的</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">Object</span>.prototype.toString(arr)) <span class="comment">//返回[object Array]</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>检测某一个实例是否有某个属性  <code>in</code></li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> obj = &#123;</span><br><span class="line">	name : <span class="string">"tom"</span>,</span><br><span class="line">	age : <span class="number">12</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">"age"</span> <span class="keyword">in</span> obj) <span class="comment">//true;</span></span><br></pre></td></tr></table></figure>
+<p>注意in无论是共有(prototype)还是私有的，都会返回。 因此，为了检测私有属性，有hasOwnProperty</p>
+<ul>
+<li>检测某一个属性是否是私有属性 <code>hasOwnProperty</code></li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(obj.hasOwnProperty(<span class="string">'age'</span>)) <span class="comment">//true;</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>检测某一个实例是否有某个属性  <code>in</code></li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">hasPubProperty</span> (<span class="params">obj,property</span>) </span>&#123;</span><br><span class="line">	<span class="keyword">return</span> property <span class="keyword">in</span> obj &amp;&amp; !obj.hasOwnProperty(property);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="原型链模式"><a href="#原型链模式" class="headerlink" title="原型链模式"></a>原型链模式</h3><ul>
+<li>数组去重,链式写法</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Array</span>.prototype.myUnique = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">	<span class="keyword">var</span> obj = &#123;&#125;;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; <span class="keyword">this</span>.length; i++ )&#123;</span><br><span class="line">		<span class="keyword">var</span> cur = <span class="keyword">this</span>[i];</span><br><span class="line">		<span class="keyword">if</span>(obj[cur] == cur)&#123;</span><br><span class="line">			<span class="keyword">this</span>[i] = <span class="keyword">this</span>[<span class="keyword">this</span>.length <span class="number">-1</span>];</span><br><span class="line">			<span class="keyword">this</span>.length--;</span><br><span class="line">			i--;</span><br><span class="line">			<span class="keyword">continue</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		obj[cur] = cur;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="keyword">this</span>;  <span class="comment">//实现链式写法</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>写一个mySlice方法</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Array</span>.prototype.mySlice = <span class="function"><span class="keyword">function</span> (<span class="params">start,end</span>) </span>&#123;</span><br><span class="line">	<span class="keyword">var</span> arr = [],</span><br><span class="line">		rArr = [];</span><br><span class="line">	start &lt; <span class="number">0</span>? start += <span class="keyword">this</span>.length : start;</span><br><span class="line">	end &lt; <span class="number">0</span>? end += <span class="keyword">this</span>.length : end;</span><br><span class="line">	end &gt;= <span class="keyword">this</span>.length? end = <span class="keyword">this</span>.length : end;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">0</span>; i&lt; <span class="keyword">this</span>.length - <span class="number">1</span> ; i++)&#123;</span><br><span class="line">		<span class="keyword">if</span>(start &lt;= i)&#123;</span><br><span class="line">			arr[arr.length] = <span class="keyword">this</span>[i];</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span>(end == i<span class="number">-1</span>)&#123;</span><br><span class="line">			<span class="keyword">break</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> arr;		</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="原型链批量设置共有属性的小问题"><a href="#原型链批量设置共有属性的小问题" class="headerlink" title="原型链批量设置共有属性的小问题"></a>原型链批量设置共有属性的小问题</h4><p>当有多项属性、方法需要在原型链上配置的时候，可以使用批量设置，但是注意，一定要设置好constuctor</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Myfun.prototype = &#123;</span><br><span class="line">	<span class="keyword">constructor</span>: Myfun,</span><br><span class="line">	this.show: function () &#123;</span><br><span class="line">		<span class="built_in">console</span>.log(<span class="keyword">this</span>.name);</span><br><span class="line">	&#125;,</span><br><span class="line">	...</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="http://ww1.sinaimg.cn/large/6f9f3683ly1fy8tozcht2j21510m415m.jpg" alt=""><br><strong>记住这张图中的内容，这种设置方式相当于新开辟的一个内存地址来保存prototype，如果没有设置contructor，这个时候，constructor 就会指向Object。</strong></p>
+<p>另一方面，如果直接内置的类上批量添加，因为会覆盖原有的很多方法，因此浏览器会屏蔽这种设置方法</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Array</span>.prototype = &#123;&#125;</span><br><span class="line"><span class="comment">//这种方法无效</span></span><br></pre></td></tr></table></figure>
+<h2 id="原型继承"><a href="#原型继承" class="headerlink" title="原型继承"></a>原型继承</h2><ol>
+<li>最常用的方法；</li>
+<li>子类B想要继承父类A中所有的属性和方法（私有+共有)，让B的prototype = A的实例。<code>B.prototype = new A</code></li>
+<li>原型继承特点，父类私有和共有的都变成了子类私有的方法和属性。<h2 id="圣杯模式"><a href="#圣杯模式" class="headerlink" title="圣杯模式"></a>圣杯模式</h2></li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> inherit = (<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">	<span class="keyword">var</span> <span class="function"><span class="keyword">function</span> <span class="title">F</span>(<span class="params"></span>) </span>&#123;&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="function"><span class="keyword">function</span> (<span class="params">Origin,Target</span>)</span>&#123;</span><br><span class="line">		F.prototype = Origin.prototype;</span><br><span class="line">		Target.prototype = <span class="keyword">new</span> F；</span><br><span class="line">		Target.prototype.constructor = Target;</span><br><span class="line">		Target.prototype.uber = Origin;</span><br><span class="line">&#125;</span><br><span class="line">&#125; ())</span><br></pre></td></tr></table></figure>
+<h2 id="中间类继承"><a href="#中间类继承" class="headerlink" title="中间类继承"></a>中间类继承</h2><p>这个比较特殊，主要用在一个问题上:</p>
+<blockquote>
+<p>当遇到argument[]这种类数组时，无法使用数组的方法，很蛋疼。比如想封装一个平均值的方法</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">avgFn</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">	<span class="keyword">var</span> sum;</span><br><span class="line">	<span class="built_in">Array</span>.prototype.sort.call(<span class="built_in">arguments</span>,<span class="function"><span class="keyword">function</span> (<span class="params">a,b</span>) </span>&#123;<span class="keyword">return</span> a-b&#125;);  <span class="comment">//升序排列，扔掉一个最大，一个最小</span></span><br><span class="line">	<span class="built_in">Array</span>.prototype.pop().call(<span class="built_in">arguments</span>);</span><br><span class="line">	<span class="built_in">Array</span>.prototype.shift().call(<span class="built_in">arguments</span>);</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; <span class="built_in">arguments</span>.length; i++)&#123;</span><br><span class="line">		sum += arr[i]</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> sum/<span class="built_in">arguments</span>.length;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>显得很麻烦，因为要通过调用Array的方法。所以，这里可以直接修改类数组(同样也是对象)的<code>__proto__</code> 属性<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">arguments</span>.__proto__ = <span class="built_in">Array</span>.prototype;</span><br><span class="line">...</span><br></pre></td></tr></table></figure></p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/JavaScript/" <i="" class="fa fa-tag"> JavaScript</a>
+          
+            <a href="/tags/前端开发/" <i="" class="fa fa-tag"> 前端开发</a>
+          
+            <a href="/tags/设计模式/" <i="" class="fa fa-tag"> 设计模式</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/10/09/2018-10-09-Better-understand-Buffer-in-Node-js/" rel="next" title="一篇帮你彻底弄懂NodeJs中的Buffer">
+                <i class="fa fa-chevron-left"></i> 一篇帮你彻底弄懂NodeJs中的Buffer
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/12/20/小米路由器R3G刷机指南/" rel="prev" title="小米路由器R3G刷机指南">
+                小米路由器R3G刷机指南 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/taka.png" alt="Vincent Ko">
+            
+              <p class="site-author-name" itemprop="name">Vincent Ko</p>
+              <p class="site-description motion-element" itemprop="description">忧绪相伴，在浪漫的气息中回忆过去，敲着代码</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">20</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">29</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/forrany" title="GitHub &rarr; https://github.com/forrany" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="mailto:im.vincentko@gmail.com" title="E-Mail &rarr; mailto:im.vincentko@gmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://weibo.com/Vincent_Kooo" title="Weibo &rarr; https://weibo.com/Vincent_Kooo" rel="noopener" target="_blank"><i class="fa fa-fw fa-weibo"></i>Weibo</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://twitter.com/vincent_kooo" title="Twitter &rarr; https://twitter.com/vincent_kooo" rel="noopener" target="_blank"><i class="fa fa-fw fa-twitter"></i>Twitter</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                推荐阅读
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://wangyaxing.cn/" title="https://wangyaxing.cn/" rel="noopener" target="_blank">王亚星博客</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://reuixiy.github.io/" title="https://reuixiy.github.io/" rel="noopener" target="_blank">reuixiy</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://shenzekun.cn/" title="http://shenzekun.cn/" rel="noopener" target="_blank">moorez</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://richardcao.me/" title="https://richardcao.me/" rel="noopener" target="_blank">lifecycle</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#单例模式"><span class="nav-number">1.</span> <span class="nav-text">单例模式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#工厂模式"><span class="nav-number">2.</span> <span class="nav-text">工厂模式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#面向对象的编程语言"><span class="nav-number">2.1.</span> <span class="nav-text">面向对象的编程语言</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#多态之重载"><span class="nav-number">2.1.1.</span> <span class="nav-text">多态之重载</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#构造函数模式"><span class="nav-number">2.2.</span> <span class="nav-text">构造函数模式</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#这个不是单例模式，而是构造函数模式"><span class="nav-number">2.2.1.</span> <span class="nav-text">这个不是单例模式，而是构造函数模式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#还有一些特点-扩展"><span class="nav-number">2.2.2.</span> <span class="nav-text">还有一些特点(扩展)</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#原型链模式"><span class="nav-number">2.3.</span> <span class="nav-text">原型链模式</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#原型链批量设置共有属性的小问题"><span class="nav-number">2.3.1.</span> <span class="nav-text">原型链批量设置共有属性的小问题</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#原型继承"><span class="nav-number">3.</span> <span class="nav-text">原型继承</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#圣杯模式"><span class="nav-number">4.</span> <span class="nav-text">圣杯模式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#中间类继承"><span class="nav-number">5.</span> <span class="nav-text">中间类继承</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Vincent Ko</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+    <span title="站点总字数">117k</span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    
+    <span title="站点阅读时长">3:33</span>
+  
+</div>
+
+
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.8.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v6.6.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    
+      
+  
+  <script color="135,127,127" opacity="0.5" zindex="-1" count="99" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script src="/lib/three/three.min.js"></script>
+  
+
+  
+  
+    <script src="/lib/three/three-waves.min.js"></script>
+  
+
+
+  
+
+
+  <script src="/js/src/utils.js?v=6.6.0"></script>
+
+  <script src="/js/src/motion.js?v=6.6.0"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/src/affix.js?v=6.6.0"></script>
+
+  <script src="/js/src/schemes/pisces.js?v=6.6.0"></script>
+
+
+
+  
+  <script src="/js/src/scrollspy.js?v=6.6.0"></script>
+<script src="/js/src/post-details.js?v=6.6.0"></script>
+
+
+
+  
+
+
+  <script src="/js/src/bootstrap.js?v=6.6.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  
+  
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+
+  <script>
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(function (item) {
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: true,
+        appId: '9z5cWwHgCpPYDuHc0wDVBrUM-gzGzoHsz',
+        appKey: 'rvAwm3XwE2eqCqQPRoVJcA12',
+        placeholder: 'Just go go',
+        avatar:'mm',
+        meta:guest,
+        pageSize:'10' || 10,
+        visitor: false
+    });
+  </script>
+
+
+
+
+  
+
+  <script>
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

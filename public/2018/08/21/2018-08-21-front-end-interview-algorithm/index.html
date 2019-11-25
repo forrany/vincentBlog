@@ -1,0 +1,1735 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<link rel="manifest" href="/manifest.json">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=6.6.0" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/VK.png?v=6.6.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon32.png?v=6.6.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon16.png?v=6.6.0">
+
+
+  <link rel="mask-icon" href="/images/VK.svg?v=6.6.0" color="#222">
+
+
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '6.6.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="终于来了，算法相关的。 其实个人理解，前端岗位对于算法的要求与其他IT岗位相比，是低得多的。 但是小白我经历了如蚂蚁金服、网易这样的大厂教做人之后，还是觉得，对于一些基本算法、思想的掌握还是必须的。 然后，就把自己遇到的、学到的算法相关的再总结一下，方便自己随时备战面试。 系列笔记： 1.VK的秋招前端奇遇记(一) 2.VK的秋招前端奇遇记(二) 3.VK的秋招前端奇遇记(三) 4.VK的秋招前端">
+<meta name="keywords" content="前端面试,JavaScript,算法">
+<meta property="og:type" content="article">
+<meta property="og:title" content="前端面试&amp;笔试爬坑算法 Algorithm">
+<meta property="og:url" content="http://yoursite.com/2018/08/21/2018-08-21-front-end-interview-algorithm/index.html">
+<meta property="og:site_name" content="VK Blog | 高闻灿的博客">
+<meta property="og:description" content="终于来了，算法相关的。 其实个人理解，前端岗位对于算法的要求与其他IT岗位相比，是低得多的。 但是小白我经历了如蚂蚁金服、网易这样的大厂教做人之后，还是觉得，对于一些基本算法、思想的掌握还是必须的。 然后，就把自己遇到的、学到的算法相关的再总结一下，方便自己随时备战面试。 系列笔记： 1.VK的秋招前端奇遇记(一) 2.VK的秋招前端奇遇记(二) 3.VK的秋招前端奇遇记(三) 4.VK的秋招前端">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/6f9f3683ly1fu93tfy076g20le06aazd.gif">
+<meta property="og:image" content="http://img.mp.itc.cn/upload/20160923/c705c53489b8455090ccb67199465387_th.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/6f9f3683ly1fu93uujulog20le0ejtyb.gif">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/6f9f3683ly1fu942wgi1tg20kz071k8b.gif">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/6f9f3683ly1fu9cru5iyjg20ih082n4c.gif">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/6f9f3683ly1fufxqalweej20r20fmwii.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/6f9f3683ly1fufy2mm3fsj20pn08wgnf.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/6f9f3683ly1fug0jaukqpj209k057jrx.jpg">
+<meta property="og:updated_time" content="2018-12-20T05:40:01.928Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="前端面试&amp;笔试爬坑算法 Algorithm">
+<meta name="twitter:description" content="终于来了，算法相关的。 其实个人理解，前端岗位对于算法的要求与其他IT岗位相比，是低得多的。 但是小白我经历了如蚂蚁金服、网易这样的大厂教做人之后，还是觉得，对于一些基本算法、思想的掌握还是必须的。 然后，就把自己遇到的、学到的算法相关的再总结一下，方便自己随时备战面试。 系列笔记： 1.VK的秋招前端奇遇记(一) 2.VK的秋招前端奇遇记(二) 3.VK的秋招前端奇遇记(三) 4.VK的秋招前端">
+<meta name="twitter:image" content="http://ww1.sinaimg.cn/large/6f9f3683ly1fu93tfy076g20le06aazd.gif">
+
+
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/08/21/2018-08-21-front-end-interview-algorithm/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>前端面试&笔试爬坑算法 Algorithm | VK Blog | 高闻灿的博客</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion .logo-line-before i { left: initial; }
+    .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">VK Blog | 高闻灿的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">一个浪漫 | 有情调 | 文艺の | 小Coder</p>
+      
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>搜索</a>
+        </li>
+      
+    </ul>
+  
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+  
+  
+  
+  
+
+  
+
+    <a href="https://github.com/forrany" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewbox="0 0 250 250" style="fill: #222; color: #fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"/><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"/><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"/></svg></a>
+
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/21/2018-08-21-front-end-interview-algorithm/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Vincent Ko">
+      <meta itemprop="description" content="忧绪相伴，在浪漫的气息中回忆过去，敲着代码">
+      <meta itemprop="image" content="/images/taka.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="VK Blog | 高闻灿的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">前端面试&笔试爬坑算法 Algorithm
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-08-21 12:00:00" itemprop="dateCreated datePublished" datetime="2018-08-21T12:00:00+08:00">2018-08-21</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2018-12-20 13:40:01" itemprop="dateModified" datetime="2018-12-20T13:40:01+08:00">2018-12-20</time>
+              
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/08/21/2018-08-21-front-end-interview-algorithm/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/08/21/2018-08-21-front-end-interview-algorithm/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                <span title="本文字数">17k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                <span title="阅读时长">30 分钟</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>终于来了，算法相关的。 其实个人理解，前端岗位对于算法的要求与其他IT岗位相比，是低得多的。 但是小白我经历了如蚂蚁金服、网易这样的大厂教做人之后，还是觉得，对于一些基本算法、思想的掌握还是必须的。 然后，就把自己遇到的、学到的算法相关的再总结一下，方便自己随时备战面试。</p>
+<p>系列笔记：</p>
+<p><a href="https://forrany.github.io/2018/08/10/2018-08-10-VK-mistake-1/" target="_blank" rel="noopener">1.VK的秋招前端奇遇记(一)</a></p>
+<p><a href="https://forrany.github.io/2018/08/11/2018-08-11-VK-mistake-2/" target="_blank" rel="noopener">2.VK的秋招前端奇遇记(二)</a></p>
+<p><a href="https://forrany.github.io/2018/08/12/2018-08-12-VK-mistake-3/" target="_blank" rel="noopener">3.VK的秋招前端奇遇记(三)</a></p>
+<p><a href="https://forrany.github.io/2018/09/04/2018-09-04-VK-mistake-4/" target="_blank" rel="noopener">4.VK的秋招前端奇遇记(四)</a></p>
+<p><a href="https://forrany.github.io/2018/08/21/2018-08-21-front-end-interview-algorithm/" target="_blank" rel="noopener">5.番外篇：前端面试&amp;笔试算法 Algorithm</a></p>
+<hr>
+<h2 id="排序"><a href="#排序" class="headerlink" title="排序"></a>排序</h2><p>JS本身数组的sort方法，可以满足日常业务操作中很多的场景了，所以我认为这也是为什么基本面试会直接让写一个<code>快速排序</code>，因为好像其他排序方法在JS中似乎没什么意义了。 </p>
+<p>但是在拼多多的面试中，面试官还是让我手写<code>选择排序</code> <code>冒泡排序</code> 和<code>快速排序</code> 的伪代码。 既然有机会总结，干脆就全部写一遍好了，从基本排序到高级排序来说。</p>
+<h3 id="基本排序算法"><a href="#基本排序算法" class="headerlink" title="基本排序算法"></a>基本排序算法</h3><p>基本排序的基本思想非常类似，重排列时用的技术基本都是一组嵌套的for循环: 外循环遍历数组的每一项，内循环则用于比较元素。</p>
+<h4 id="冒泡排序"><a href="#冒泡排序" class="headerlink" title="冒泡排序"></a>冒泡排序</h4><p>最笨最基本最经典点的方法，不管学什么语言，说到排序，第一个接触的就是它了吧。基本思想什么的太经典了，就不复数了，直接用例子说明过程吧：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">E A D B H</span><br></pre></td></tr></table></figure>
+<p>经过一次排列后，变成</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">A E D B H</span><br></pre></td></tr></table></figure>
+<p>前两个元素互换了，接下来变成：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">A D E B H</span><br></pre></td></tr></table></figure>
+<p>第二个和第三个互换，继续：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">A D B E H</span><br></pre></td></tr></table></figure>
+<p>第三个和第四个互换，最后，第二个和第三个元素还会互换一次，得到最终的顺序为：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">A B D E H</span><br></pre></td></tr></table></figure>
+<p><img src="http://ww1.sinaimg.cn/large/6f9f3683ly1fu93tfy076g20le06aazd.gif" alt=""></p>
+<p>好了，其实基本思想就是逐个的比较，下面就实现一下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">bubleSort</span>(<span class="params">arr</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> len = arr.length;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> outer = len ; outer &gt;= <span class="number">2</span>; outer--) &#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">let</span> inner = <span class="number">0</span>; inner &lt;=outer - <span class="number">1</span>; inner++) &#123;</span><br><span class="line">            <span class="keyword">if</span>(arr[inner] &gt; arr[inner + <span class="number">1</span>]) &#123;</span><br><span class="line">                <span class="keyword">let</span> temp = arr[inner];</span><br><span class="line">                arr[inner] = arr[inner + <span class="number">1</span>];</span><br><span class="line">                arr[inner + <span class="number">1</span>] = temp;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> arr;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这里有两点需要注意：</p>
+<ol>
+<li>外层循环，从最大值开始递减，因为内层是两两比较，因此最外层当<code>&gt;=2</code>时即可停止；</li>
+<li>内层是两两比较，从0开始，比较<code>inner</code>与<code>inner+1</code>，因此，临界条件是<code>inner&lt;outer -1</code></li>
+</ol>
+<p>在比较交换的时候，就是计算机中最经典的交换策略，用临时变量<code>temp</code>保存值，但是面试官问过我，<strong>ES6有没有简单的方法实现？</strong> 有的，如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">arr2 = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>];</span><br><span class="line">[arr2[<span class="number">0</span>],arr2[<span class="number">1</span>]] = [arr2[<span class="number">1</span>],arr2[<span class="number">0</span>]]  <span class="comment">//ES6解构赋值</span></span><br><span class="line"><span class="built_in">console</span>.log(arr2)  <span class="comment">// [2, 1, 3, 4]</span></span><br></pre></td></tr></table></figure>
+<p>所以，刚才的冒牌排序可以优化如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">bubleSort</span>(<span class="params">arr</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> len = arr.length;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> outer = len ; outer &gt;= <span class="number">2</span>; outer--) &#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">let</span> inner = <span class="number">0</span>; inner &lt;=outer - <span class="number">1</span>; inner++) &#123;</span><br><span class="line">            <span class="keyword">if</span>(arr[inner] &gt; arr[inner + <span class="number">1</span>]) &#123;</span><br><span class="line">                [arr[inner],arr[inner+<span class="number">1</span>]] = [arr[inner+<span class="number">1</span>],arr[inner]]</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> arr;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="选择排序"><a href="#选择排序" class="headerlink" title="选择排序"></a>选择排序</h4><p>选择排序是从数组的开头开始，将第一个元素和其他元素作比较，检查完所有的元素后，最小的放在第一个位置，接下来再开始从第二个元素开始，重复以上一直到最后。</p>
+<p><img src="http://img.mp.itc.cn/upload/20160923/c705c53489b8455090ccb67199465387_th.jpg" alt=""></p>
+<p>有了刚才的铺垫，我觉得不用再演示了，很简单嘛： 外层循环从0开始到<code>length-1</code>， 然后内层比较，最小的放开头，走你：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">selectSort</span>(<span class="params">arr</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> len = arr.length;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">let</span> i = <span class="number">0</span> ;i &lt; len - <span class="number">1</span>; i++) &#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">let</span> j = i ; j&lt;len; j++) &#123;</span><br><span class="line">            <span class="keyword">if</span>(arr[j] &lt; arr[i]) &#123;</span><br><span class="line">                [arr[i],arr[j]] = [arr[j],arr[i]];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> arr</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>简单说两句：</p>
+<ul>
+<li>外层循环的<code>i</code>表示第几轮，<code>arr[i]</code>就表示当前轮次最靠前(小)的位置；</li>
+<li>内层从<code>i</code>开始，依次往后数，找到比开头小的，互换位置即可</li>
+</ul>
+<p>结束，收工！！</p>
+<h4 id="插入排序"><a href="#插入排序" class="headerlink" title="插入排序"></a>插入排序</h4><p>插入排序核心–扑克牌思想： <strong>就想着自己在打扑克牌，接起来一张，放哪里无所谓，再接起来一张，比第一张小，放左边，继续接，可能是中间数，就插在中间….依次</strong></p>
+<p><img src="http://ww1.sinaimg.cn/large/6f9f3683ly1fu93uujulog20le0ejtyb.gif" alt=""></p>
+<p>其实每种算法，主要是理解其原理，至于写代码，都是在原理之上顺理成章的事情：</p>
+<ul>
+<li>首先将待排序的第一个记录作为一个有序段</li>
+<li>从第二个开始，到最后一个，依次和前面的有序段进行比较，确定插入位置</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">insertSort</span>(<span class="params">arr</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">let</span> i = <span class="number">1</span>; i &lt; arr.length; i++) &#123;  <span class="comment">//外循环从1开始，默认arr[0]是有序段</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">let</span> j = i; j &gt; <span class="number">0</span>; j--) &#123;  <span class="comment">//j = i,将arr[j]依次插入有序段中</span></span><br><span class="line">            <span class="keyword">if</span>(arr[j] &lt; arr[j<span class="number">-1</span>]) &#123;</span><br><span class="line">                [arr[j],arr[j<span class="number">-1</span>]] = [arr[j<span class="number">-1</span>],arr[j]];</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> arr;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>分析： 注意这里两次循环中，<code>i</code>和<code>j</code>的含义：</p>
+<ol>
+<li><code>i</code>是外循环，依次把后面的数插入前面的有序序列中，默认<code>arr[0]</code>为有序的，<code>i</code>就从1开始</li>
+<li><code>j</code>进来后，依次与前面队列的数进行比较，因为前面的序列是有序的，因此只需要循环比较、交换即可</li>
+<li>注意这里的<code>break</code>，因为前面是都是有序的序列，所以如果当前要插入的值<code>arr[j]</code>大于或等于<code>arr[j-1]</code>，则无需继续比较，直接下一次循环就可以了。</li>
+</ol>
+<h4 id="时间复杂度"><a href="#时间复杂度" class="headerlink" title="时间复杂度"></a>时间复杂度</h4><p>乍一看，好像插入排序速度还不慢，但是要知道： 当序列正好逆序的时候，每次插入都要一次次交换，这个速度和冒泡排序是一样的，时间复杂度O(n²)； 当然运气好，前面是有序的，那时间复杂度就只有O(n)了，直接插入即可。</p>
+<table>
+<thead>
+<tr>
+<th>排序算法</th>
+<th style="text-align:center">平均时间复杂度</th>
+<th style="text-align:center">最坏时间复杂度</th>
+<th style="text-align:center">空间复杂度</th>
+<th style="text-align:center">是否稳定</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>冒泡排序</td>
+<td style="text-align:center">O(n²)</td>
+<td style="text-align:center">O(n²)</td>
+<td style="text-align:center">O(1)</td>
+<td style="text-align:center">是</td>
+</tr>
+<tr>
+<td>选择排序</td>
+<td style="text-align:center">O(n²)</td>
+<td style="text-align:center">O(n²)</td>
+<td style="text-align:center">O(1)</td>
+<td style="text-align:center">不是</td>
+</tr>
+<tr>
+<td>直接插入排序</td>
+<td style="text-align:center">O(n²)</td>
+<td style="text-align:center">O(n²)</td>
+<td style="text-align:center">O(1)</td>
+<td style="text-align:center">是</td>
+</tr>
+</tbody>
+</table>
+<p>好了，这张表如何快速记忆呢？ 方法就是一开始写的<strong>基本排序算法</strong> 。 一开始就说到，基本思想就是两层循环嵌套，第一遍找元素O(n),第二遍找位置O(n)，所以这几种方法，时间复杂度就可以这么简便记忆啦!</p>
+<hr>
+<h3 id="高级排序算法"><a href="#高级排序算法" class="headerlink" title="高级排序算法"></a>高级排序算法</h3><p>如果所有排序都像上面的基本方法一样，那么对于大量数据的处理，将是灾难性的，老哥，只是让你排个序，你都用了O(n²)。 好吧，所以接下来这些高级排序算法，在大数据上，可以大大的减少复杂度。 </p>
+<h4 id="快速排序"><a href="#快速排序" class="headerlink" title="快速排序"></a>快速排序</h4><p>快速排序可以说是对于前端最最最最重要的排序算法，没有之一了，面试官问到排序算法，快排的概率能有80%以上(我瞎统计的…信不信由你)。</p>
+<p>所以快排是什么呢？</p>
+<blockquote>
+<p>快排是处理大数据最快的排序算法之一。它是一种分而治之的算法，通过递归的方式将数据依次分解为包含较小元素和较大元素的不同子序列。该算法不断重复这个步骤直至所有数据都是有序的。</p>
+</blockquote>
+<p>简单说： 找到一个数作为参考，比这个数字大的放在数字左边，比它小的放在右边； 然后分别再对左边和右变的序列做相同的操作:</p>
+<ol>
+<li>选择一个基准元素，将列表分割成两个子序列；</li>
+<li>对列表重新排序，将所有小于基准值的元素放在基准值前面，所有大于基准值的元素放在基准值的后面；</li>
+<li>分别对较小元素的子序列和较大元素的子序列重复步骤1和2</li>
+</ol>
+<p><img src="http://ww1.sinaimg.cn/large/6f9f3683ly1fu942wgi1tg20kz071k8b.gif" alt=""></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">quickSort</span>(<span class="params">arr</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(arr.length &lt;= <span class="number">1</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> arr;  <span class="comment">//递归出口</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">var</span> left = [],</span><br><span class="line">        right = [],</span><br><span class="line">        current = arr.splice(<span class="number">0</span>,<span class="number">1</span>); <span class="comment">//注意splice后，数组长度少了一个</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; arr.length; i++) &#123;</span><br><span class="line">        <span class="keyword">if</span>(arr[i] &lt; current) &#123;</span><br><span class="line">            left.push(arr[i])  <span class="comment">//放在左边</span></span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            right.push(arr[i]) <span class="comment">//放在右边</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> quickSort(left).concat(current,quickSort(right)); <span class="comment">//递归</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="希尔排序"><a href="#希尔排序" class="headerlink" title="希尔排序"></a>希尔排序</h4><p>希尔排序是插入排序的改良算法，但是核心理念与插入算法又不同，它会先比较距离较远的元素，而非相邻的元素。文字太枯燥，还是看下面的动图吧：</p>
+<p><img src="http://ww1.sinaimg.cn/large/6f9f3683ly1fu9cru5iyjg20ih082n4c.gif" alt=""></p>
+<p>在实现之前，先看下刚才插入排序怎么写的：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">insertSort</span>(<span class="params">arr</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">let</span> i = <span class="number">1</span>; i &lt; arr.length - <span class="number">1</span>; i++) &#123;  <span class="comment">//外循环从1开始，默认arr[0]是有序段</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">let</span> j = i; j &gt; <span class="number">0</span>; j--) &#123;  <span class="comment">//j = i,将arr[j]依次插入有序段中</span></span><br><span class="line">            <span class="keyword">if</span>(arr[j] &lt; arr[j<span class="number">-1</span>]) &#123;</span><br><span class="line">                [arr[j],arr[j<span class="number">-1</span>]] = [arr[j<span class="number">-1</span>],arr[j]];</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> arr;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>现在，不同之处是在上面的基础上，让步长按照3、2、1来进行比较，相当于是三层循环和嵌套啦。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">insertSort(arr,[<span class="number">3</span>,<span class="number">2</span>,<span class="number">1</span>]);</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">shellSort</span>(<span class="params">arr,gap</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(arr)<span class="comment">//为了方便观察过程，使用时去除</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">let</span> i = <span class="number">0</span>; i&lt;gap.length; i++) &#123;  <span class="comment">//最外层循环，一次取不同的步长，步长需要预先给出</span></span><br><span class="line">        <span class="keyword">let</span> n = gap[i]; <span class="comment">//步长为n</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">let</span> j = i + n; j &lt; arr.length; j++) &#123; <span class="comment">//接下类和插入排序一样，j循环依次取后面的数</span></span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">let</span> k = j; k &gt; <span class="number">0</span>; k-=n) &#123; <span class="comment">//k循环进行比较，和直接插入的唯一区别是1变为了n</span></span><br><span class="line">                <span class="keyword">if</span>(arr[k] &lt; arr[k-n]) &#123;</span><br><span class="line">                    [arr[k],arr[k-n]] = [arr[k-n],arr[k]];</span><br><span class="line">                    <span class="built_in">console</span>.log(<span class="string">`当前序列为[<span class="subst">$&#123;arr&#125;</span>] \n 交换了<span class="subst">$&#123;arr[k]&#125;</span>和<span class="subst">$&#123;arr[k-n]&#125;</span>`</span>)<span class="comment">//为了观察过程</span></span><br><span class="line">                &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                    <span class="keyword">continue</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> arr;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>直接看这个三层循环嵌套的内容，会稍显复杂，这也是为什么先把插入排序写在前面做一个对照。 其实三层循环的内两层完全就是一个插入排序，只不过原来插入排序间隔为<code>1</code>，而希尔排序的间隔是变换的<code>n</code>， 如果把<code>n</code>修改为<code>1</code>，就会发现是完全一样的了。</p>
+<p>运行一下看看</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> arr = [<span class="number">3</span>, <span class="number">2</span>, <span class="number">45</span>, <span class="number">6</span>, <span class="number">55</span>, <span class="number">23</span>, <span class="number">5</span>, <span class="number">4</span>, <span class="number">8</span>, <span class="number">9</span>, <span class="number">19</span>, <span class="number">0</span>];</span><br><span class="line"><span class="keyword">var</span> gap = [<span class="number">3</span>,<span class="number">2</span>,<span class="number">1</span>];</span><br><span class="line"><span class="built_in">console</span>.log(shellSort(arr,gap))</span><br></pre></td></tr></table></figure>
+<p>结果如下:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">(<span class="number">12</span>) [<span class="number">3</span>, <span class="number">2</span>, <span class="number">45</span>, <span class="number">6</span>, <span class="number">55</span>, <span class="number">23</span>, <span class="number">5</span>, <span class="number">4</span>, <span class="number">8</span>, <span class="number">9</span>, <span class="number">19</span>, <span class="number">0</span>] <span class="comment">//初始值</span></span><br><span class="line">当前序列为[<span class="number">3</span>,<span class="number">2</span>,<span class="number">23</span>,<span class="number">6</span>,<span class="number">55</span>,<span class="number">45</span>,<span class="number">5</span>,<span class="number">4</span>,<span class="number">8</span>,<span class="number">9</span>,<span class="number">19</span>,<span class="number">0</span>] </span><br><span class="line"> 交换了<span class="number">45</span>和<span class="number">23</span></span><br><span class="line">当前序列为[<span class="number">3</span>,<span class="number">2</span>,<span class="number">23</span>,<span class="number">5</span>,<span class="number">55</span>,<span class="number">45</span>,<span class="number">6</span>,<span class="number">4</span>,<span class="number">8</span>,<span class="number">9</span>,<span class="number">19</span>,<span class="number">0</span>] </span><br><span class="line"> 交换了<span class="number">6</span>和<span class="number">5</span></span><br><span class="line">当前序列为[<span class="number">3</span>,<span class="number">2</span>,<span class="number">23</span>,<span class="number">5</span>,<span class="number">4</span>,<span class="number">45</span>,<span class="number">6</span>,<span class="number">55</span>,<span class="number">8</span>,<span class="number">9</span>,<span class="number">19</span>,<span class="number">0</span>] </span><br><span class="line"> 交换了<span class="number">55</span>和<span class="number">4</span></span><br><span class="line">当前序列为[<span class="number">3</span>,<span class="number">2</span>,<span class="number">23</span>,<span class="number">5</span>,<span class="number">4</span>,<span class="number">8</span>,<span class="number">6</span>,<span class="number">55</span>,<span class="number">45</span>,<span class="number">9</span>,<span class="number">19</span>,<span class="number">0</span>] </span><br><span class="line"> 交换了<span class="number">45</span>和<span class="number">8</span></span><br><span class="line">当前序列为[<span class="number">3</span>,<span class="number">2</span>,<span class="number">8</span>,<span class="number">5</span>,<span class="number">4</span>,<span class="number">23</span>,<span class="number">6</span>,<span class="number">55</span>,<span class="number">45</span>,<span class="number">9</span>,<span class="number">19</span>,<span class="number">0</span>] </span><br><span class="line"> 交换了<span class="number">23</span>和<span class="number">8</span></span><br><span class="line">当前序列为[<span class="number">3</span>,<span class="number">2</span>,<span class="number">8</span>,<span class="number">5</span>,<span class="number">4</span>,<span class="number">23</span>,<span class="number">6</span>,<span class="number">19</span>,<span class="number">45</span>,<span class="number">9</span>,<span class="number">55</span>,<span class="number">0</span>] </span><br><span class="line"> 交换了<span class="number">55</span>和<span class="number">19</span></span><br><span class="line">当前序列为[<span class="number">3</span>,<span class="number">2</span>,<span class="number">8</span>,<span class="number">5</span>,<span class="number">4</span>,<span class="number">23</span>,<span class="number">6</span>,<span class="number">19</span>,<span class="number">0</span>,<span class="number">9</span>,<span class="number">55</span>,<span class="number">45</span>] </span><br><span class="line"> 交换了<span class="number">45</span>和<span class="number">0</span></span><br><span class="line">当前序列为[<span class="number">3</span>,<span class="number">2</span>,<span class="number">8</span>,<span class="number">5</span>,<span class="number">4</span>,<span class="number">0</span>,<span class="number">6</span>,<span class="number">19</span>,<span class="number">23</span>,<span class="number">9</span>,<span class="number">55</span>,<span class="number">45</span>] </span><br><span class="line"> 交换了<span class="number">23</span>和<span class="number">0</span></span><br><span class="line">当前序列为[<span class="number">3</span>,<span class="number">2</span>,<span class="number">0</span>,<span class="number">5</span>,<span class="number">4</span>,<span class="number">8</span>,<span class="number">6</span>,<span class="number">19</span>,<span class="number">23</span>,<span class="number">9</span>,<span class="number">55</span>,<span class="number">45</span>] </span><br><span class="line"> 交换了<span class="number">8</span>和<span class="number">0</span></span><br><span class="line">当前序列为[<span class="number">0</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">5</span>,<span class="number">4</span>,<span class="number">8</span>,<span class="number">6</span>,<span class="number">19</span>,<span class="number">23</span>,<span class="number">9</span>,<span class="number">55</span>,<span class="number">45</span>] </span><br><span class="line"> 交换了<span class="number">3</span>和<span class="number">0</span></span><br><span class="line">当前序列为[<span class="number">0</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">5</span>,<span class="number">4</span>,<span class="number">8</span>,<span class="number">6</span>,<span class="number">9</span>,<span class="number">23</span>,<span class="number">19</span>,<span class="number">55</span>,<span class="number">45</span>] </span><br><span class="line"> 交换了<span class="number">19</span>和<span class="number">9</span></span><br><span class="line">当前序列为[<span class="number">0</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">8</span>,<span class="number">6</span>,<span class="number">9</span>,<span class="number">23</span>,<span class="number">19</span>,<span class="number">55</span>,<span class="number">45</span>] </span><br><span class="line"> 交换了<span class="number">5</span>和<span class="number">4</span></span><br><span class="line">当前序列为[<span class="number">0</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>,<span class="number">8</span>,<span class="number">9</span>,<span class="number">23</span>,<span class="number">19</span>,<span class="number">55</span>,<span class="number">45</span>] </span><br><span class="line"> 交换了<span class="number">8</span>和<span class="number">6</span></span><br><span class="line">当前序列为[<span class="number">0</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>,<span class="number">8</span>,<span class="number">9</span>,<span class="number">19</span>,<span class="number">23</span>,<span class="number">55</span>,<span class="number">45</span>] </span><br><span class="line"> 交换了<span class="number">23</span>和<span class="number">19</span></span><br><span class="line">当前序列为[<span class="number">0</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>,<span class="number">8</span>,<span class="number">9</span>,<span class="number">19</span>,<span class="number">23</span>,<span class="number">45</span>,<span class="number">55</span>] </span><br><span class="line"> 交换了<span class="number">55</span>和<span class="number">45</span></span><br></pre></td></tr></table></figure>
+<h4 id="时间复杂度总结"><a href="#时间复杂度总结" class="headerlink" title="时间复杂度总结"></a>时间复杂度总结</h4><p>wait？ 不是还有很多排序算法的吗？怎么不继续了？ 是的，其实排序是很深奥的问题，如果研究透各个方法的实现、性能等等，内容恐怕多到爆炸了…而且这个也主要是为<strong>前端常见算法</strong> 问题的总结，个人觉得到这里就差不多了</p>
+<table>
+<thead>
+<tr>
+<th>排序算法</th>
+<th style="text-align:center">平均时间复杂度</th>
+<th style="text-align:center">最坏时间复杂度</th>
+<th style="text-align:center">空间复杂度</th>
+<th style="text-align:center">是否稳定</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>冒泡排序</td>
+<td style="text-align:center">O(n²)</td>
+<td style="text-align:center">O(n²)</td>
+<td style="text-align:center">O(1)</td>
+<td style="text-align:center">是</td>
+</tr>
+<tr>
+<td>选择排序</td>
+<td style="text-align:center">O(n²)</td>
+<td style="text-align:center">O(n²)</td>
+<td style="text-align:center">O(1)</td>
+<td style="text-align:center">不是</td>
+</tr>
+<tr>
+<td>直接插入排序</td>
+<td style="text-align:center">O(n²)</td>
+<td style="text-align:center">O(n²)</td>
+<td style="text-align:center">O(1)</td>
+<td style="text-align:center">是</td>
+</tr>
+<tr>
+<td>快速排序</td>
+<td style="text-align:center">O(nlogn)</td>
+<td style="text-align:center">O(n²)</td>
+<td style="text-align:center">O(logn)</td>
+<td style="text-align:center">不是</td>
+</tr>
+<tr>
+<td>希尔排序</td>
+<td style="text-align:center">O(nlogn)</td>
+<td style="text-align:center">O(n^s)</td>
+<td style="text-align:center">O(1)</td>
+<td style="text-align:center">不是</td>
+</tr>
+</tbody>
+</table>
+<h5 id="是否稳定"><a href="#是否稳定" class="headerlink" title="是否稳定"></a>是否稳定</h5><p>如果不考虑稳定性，快排似乎是接近完美的一种方法，但可惜它是不稳定的。 那什么是稳定性呢？</p>
+<p>通俗的讲<strong>有两个相同的数A和B，在排序之前A在B的前面，而经过排序之后，B跑到了A的前面，对于这种情况的发生，我们管他叫做排序的不稳定性</strong>，而快速排序在对存在相同数进行排序时就有可能发生这种情况。 </p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">比如对(5，3A，6，3B ) 进行排序，排序之前相同的数3A与3B，A在B的前面，经过排序之后会变成  </span></span><br><span class="line"><span class="comment">	（3B，3A，5，6）</span></span><br><span class="line"><span class="comment">所以说快速排序是一个不稳定的排序</span></span><br><span class="line"><span class="comment">/*</span></span><br></pre></td></tr></table></figure>
+<p>稳定性有什么意义？ 个人理解对于前端来说，比如我们熟知框架中的虚拟DOM的比较，我们对一个<code>&lt;ul&gt;</code>列表进行渲染，当数据改变后需要比较变化时，不稳定排序或操作将会使本身不需要变化的东西变化，导致重新渲染，带来性能的损耗。 </p>
+<h5 id="辅助记忆"><a href="#辅助记忆" class="headerlink" title="辅助记忆"></a>辅助记忆</h5><ul>
+<li>时间复杂度记忆<ul>
+<li>冒泡、选择、直接 排序需要两个for循环，每次只关注一个元素，平均时间复杂度为O(n²)(一遍找元素O(n)，一遍找位置O(n)）</li>
+<li>快速、归并、希尔、堆基于二分思想，log以2为底，平均时间复杂度为O(nlogn)(一遍找元素O(n)，一遍找位置O(logn))</li>
+</ul>
+</li>
+<li>稳定性记忆-“快希选堆”（快牺牲稳定性） </li>
+<li></li>
+</ul>
+<hr>
+<h2 id="递归"><a href="#递归" class="headerlink" title="递归"></a>递归</h2><p>递归，其实就是自己调用自己。</p>
+<p>很多时候我们自己觉得麻烦或者感觉 “想象不过来”，主要是自己和自己较真，因为交给递归，它自己会帮你完成需要做的。</p>
+<p>递归步骤：</p>
+<ul>
+<li>寻找出口，递归一定有一个出口，锁定出口，保证不会死循环</li>
+<li>递归条件，符合递归条件，自己调用自己。</li>
+</ul>
+<blockquote>
+<p>talk is cheap，show me code！</p>
+</blockquote>
+<p>斐波那契数列，每个语言讲递归都会从这个开始，但是既然搞前端，就搞点不一样的吧，从对象的深度克隆(deep clone)说起</p>
+<p><strong>Deep Clone</strong> ：实现对一个对象(object)的深度克隆</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//所谓深度克隆，就是当对象的某个属性值为object或array的时候，要获得一份copy，而不是直接拿到引用值</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">deepClone</span>(<span class="params">origin,target</span>) </span>&#123;  <span class="comment">//origin是被克隆对象，target是我们获得copy</span></span><br><span class="line">    <span class="keyword">var</span> target = target || &#123;&#125;; <span class="comment">//定义target</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">var</span> key <span class="keyword">in</span> origin) &#123;  <span class="comment">//遍历原对象</span></span><br><span class="line">        <span class="keyword">if</span>(origin.hasOwnProperty(key)) &#123;</span><br><span class="line">            <span class="keyword">if</span>(<span class="built_in">Array</span>.isArray(origin[key])) &#123; <span class="comment">//如果是数组</span></span><br><span class="line">                target[key] = [];</span><br><span class="line">                deepClone(origin[key],target[key]) <span class="comment">//递归</span></span><br><span class="line">            &#125; <span class="keyword">else</span> <span class="keyword">if</span> (<span class="keyword">typeof</span> origin[key] === <span class="string">'object'</span> &amp;&amp; origin[key] !== <span class="literal">null</span>) &#123;</span><br><span class="line">                target[key] = &#123;&#125;;</span><br><span class="line">                deepClone(origin[key],target[key]) <span class="comment">//递归</span></span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                target[key] = origin[key];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> target;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这个可以说是前端笔试/面试中经常经常遇到的问题了，思路是很清晰的：</p>
+<ul>
+<li>出口： 遍历对象结束后return</li>
+<li>递归条件： 遇到引用值Array 或 Object</li>
+</ul>
+<p>剩下的事情，交给JS自己处理就好了，我们不用考虑内部的层层嵌套，想太多</p>
+<h3 id="实战例题"><a href="#实战例题" class="headerlink" title="实战例题"></a>实战例题</h3><p>接下来，列举一些自己在最近笔试、面试中遇到的，需要使用递归实现的问题</p>
+<h4 id="Q1：Array数组的flat方法实现-2018网易雷火-amp-伏羲前端秋招笔试"><a href="#Q1：Array数组的flat方法实现-2018网易雷火-amp-伏羲前端秋招笔试" class="headerlink" title="Q1：Array数组的flat方法实现(2018网易雷火&amp;伏羲前端秋招笔试)"></a>Q1：Array数组的flat方法实现(2018网易雷火&amp;伏羲前端秋招笔试)</h4><p>Array的方法flat很多浏览器还未能实现，请写一个flat方法，实现扁平化嵌套数组，如：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Array</span></span><br><span class="line"><span class="keyword">var</span> arr1 = [<span class="number">1</span>, <span class="number">2</span>, [<span class="number">3</span>, <span class="number">4</span>]];</span><br><span class="line">arr1.flat(); </span><br><span class="line"><span class="comment">// [1, 2, 3, 4]</span></span><br></pre></td></tr></table></figure>
+<p>这个问题的实现思路和Deep Clone非常相似，这里实现如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Array</span>.prototype.flat = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> arr = [];</span><br><span class="line">    <span class="keyword">this</span>.forEach(<span class="function">(<span class="params">item,idx</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">if</span>(<span class="built_in">Array</span>.isArray(item)) &#123;</span><br><span class="line">            arr = arr.concat(item.flat()); <span class="comment">//递归去处理数组元素</span></span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            arr.push(item)   <span class="comment">//非数组直接push进去</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">    <span class="keyword">return</span> arr;   <span class="comment">//递归出口</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>好了，可以测试一下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">arr = [[<span class="number">2</span>],[[<span class="number">2</span>,<span class="number">3</span>],[<span class="number">2</span>]],<span class="number">3</span>,<span class="number">4</span>]</span><br><span class="line">arr.flat()</span><br><span class="line"><span class="comment">// [2, 2, 3, 2, 3, 4]</span></span><br></pre></td></tr></table></figure>
+<p><strong>神秘力量的新解法</strong></p>
+<p>在评论区的一位小伙伴，提出了更好的办法，很简洁、方便，只用一句话就可以实现需求哦(不过你这样去解答一道网易的“编程题”,不觉得让人家有点难堪嘛~哈哈)<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">arr.prototype.flat = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.toString().split(<span class="string">','</span>).map(<span class="function"><span class="params">item</span>=&gt;</span> +item )</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>好了，惊叹完之后，大概说下实现吧：</p>
+<ol>
+<li>toString方法，连接数组并返回一个字符串 <code>&#39;2,2,3,2,3,4&#39;</code></li>
+<li>split方法分割字符串，变成数组<code>[&#39;2&#39;,&#39;2&#39;,&#39;3&#39;,&#39;2&#39;,&#39;3&#39;,&#39;4&#39;]</code></li>
+<li>map方法，将string映射成为number类型<code>2,2,3,2,3,4</code></li>
+</ol>
+<h4 id="Q2-实现简易版的co，自动执行generator"><a href="#Q2-实现简易版的co，自动执行generator" class="headerlink" title="Q2 实现简易版的co，自动执行generator"></a>Q2 实现简易版的co，自动执行generator</h4><p>这个问题，详细的解释可以在我之前的文章(<a href="https://juejin.im/post/5b5f169fe51d4518e311ba78" target="_blank" rel="noopener">从Co剖析和解释generator的异步原理</a>)去看一下，如果对ES6的iterator和generator不太了解的，可以跳过这个问题。</p>
+<p>比如实现如下的功能:<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> co = <span class="built_in">require</span>(<span class="string">'co'</span>);</span><br><span class="line">co(<span class="function"><span class="keyword">function</span> *(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">const</span> url = <span class="string">'http://jasonplacerholder.typecoder.com/posts/1'</span>;</span><br><span class="line">    <span class="keyword">const</span> response = <span class="keyword">yield</span> fetch(url);</span><br><span class="line">    <span class="keyword">const</span> post = <span class="keyword">yield</span> response.json();</span><br><span class="line">    <span class="keyword">const</span> title = post.title;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'Title: '</span>,title);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></p>
+<p>剖析：</p>
+<ul>
+<li>第一步找出口，执行器返回的iterator如果状态为<code>done</code>，代表结束，可以出去</li>
+<li>递归条件： 取到下一个iterator，进行递归，自我调用</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">run</span>(<span class="params">generat</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">const</span> iterator = generat();</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">autoRun</span>(<span class="params">iteration</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(iteration.done) &#123;<span class="keyword">return</span> iteration.value&#125;  <span class="comment">//出口</span></span><br><span class="line">        <span class="keyword">const</span> anotherPromise = iteration.value;</span><br><span class="line">        anoterPromise.then(<span class="function"><span class="params">x</span> =&gt;</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> autoRun(iterator.next(x))  <span class="comment">//递归条件</span></span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> autoRun(iterator.next()) </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="Q3-爬楼梯问题"><a href="#Q3-爬楼梯问题" class="headerlink" title="Q3. 爬楼梯问题"></a>Q3. 爬楼梯问题</h4><p>有一楼梯共M级，刚开始时你在第一级，若每次只能跨上一级或二级，要走上第M级，共有多少种走法？</p>
+<p><strong>分析</strong>： 这个问题要倒过来看，要到达n级楼梯，只有两种方式，从（n-1）级 或 （n-2）级到达的。所以可以用递推的思想去想这题，假设有一个数组s[n], 那么s[1] = 1（由于一开始就在第一级，只有一种方法）， s[2] = 1（只能从s[1]上去 没有其他方法）。</p>
+<p>那么就可以推出s[3] ~ s[n]了。</p>
+<p>下面继续模拟一下， s[3] = s[1] + s[2]， 因为只能从第一级跨两步， 或者第二级跨一步。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">cStairs</span>(<span class="params">n</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(n === <span class="number">1</span> || n === <span class="number">2</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> cStairs(n<span class="number">-1</span>) + cStairs(n<span class="number">-2</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>嗯嗯，没错呢，其实就是斐波纳契数列没跑了</p>
+<h4 id="Q4-二分查找"><a href="#Q4-二分查找" class="headerlink" title="Q4.二分查找"></a>Q4.二分查找</h4><p>二分查找，是在一个有序的序列里查找某一个值，与小时候玩的猜数字游戏非常相啦：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">A: 0 ~ 100 猜一个数字</span><br><span class="line">B: 50</span><br><span class="line">A: 大了</span><br><span class="line">B: 25</span><br><span class="line">A: 对头，就是25</span><br></pre></td></tr></table></figure>
+<p>因此，思路也就非常清楚了，这里有递归和非递归两种写法，先说下递归的方法吧：</p>
+<ul>
+<li>设定区间,low和high</li>
+<li>找出口： 找到target，返回target；</li>
+<li>否则寻找，当前次序没有找到，把区间缩小后递归</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">binaryFind</span>(<span class="params">arr,target,low = <span class="number">0</span>,high = arr.length - <span class="number">1</span></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">const</span> n = <span class="built_in">Math</span>.floor((low+high) /<span class="number">2</span>);</span><br><span class="line">    <span class="keyword">const</span> cur = arr[n];</span><br><span class="line">    <span class="keyword">if</span>(cur === target) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">`找到了<span class="subst">$&#123;target&#125;</span>,在第<span class="subst">$&#123;n+<span class="number">1</span>&#125;</span>个`</span>;</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span>(cur &gt; target) &#123;</span><br><span class="line">        <span class="keyword">return</span> binaryFind(arr,target,low, n<span class="number">-1</span>);</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (cur &lt; target) &#123;</span><br><span class="line">        <span class="keyword">return</span> binaryFind(arr,target,n+<span class="number">1</span>,high);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>接下来，使用循环来做一下二分查找，其实思路基本一致：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">binaryFind</span>(<span class="params">arr, target</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> low = <span class="number">0</span>,</span><br><span class="line">        high = arr.length - <span class="number">1</span>,</span><br><span class="line">        mid;</span><br><span class="line">    <span class="keyword">while</span> (low &lt;= high) &#123;</span><br><span class="line">        mid = <span class="built_in">Math</span>.floor((low + high) / <span class="number">2</span>);</span><br><span class="line">        <span class="keyword">if</span> (target === arr[mid]) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="string">`找到了<span class="subst">$&#123;target&#125;</span>,在第<span class="subst">$&#123;mid + <span class="number">1</span>&#125;</span>个`</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (target &gt; arr[mid]) &#123;</span><br><span class="line">            low = mid + <span class="number">1</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (target &lt; arr[mid]) &#123;</span><br><span class="line">            high = mid - <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">-1</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="二叉树和二叉查找树"><a href="#二叉树和二叉查找树" class="headerlink" title="二叉树和二叉查找树"></a>二叉树和二叉查找树</h2><h3 id="树的基本概念"><a href="#树的基本概念" class="headerlink" title="树的基本概念"></a>树的基本概念</h3><p>这里对基本概念就不详细复习了，在各大资料中有更详尽的介绍，这里就只简单介绍基本概念和术语，然后使用JavaScript实现一个二叉树，并封装其方法。</p>
+<p><img src="http://ww1.sinaimg.cn/large/6f9f3683ly1fufxqalweej20r20fmwii.jpg" alt=""></p>
+<p>如图所示，一棵树最上面的几点称为根节点，如果一个节点下面连接多个节点，那么该节点成为父节点，它下面的节点称为子节点，一个节点可以有0个、1个或更多节点，没有子节点的节点叫叶子节点。</p>
+<p><strong>二叉树</strong>，是一种特殊的树，即子节点最多只有两个，这个限制可以使得写出高效的插入、删除、和查找数据。在二叉树中，子节点分别叫左节点和右节点。 </p>
+<p><img src="http://ww1.sinaimg.cn/large/6f9f3683ly1fufy2mm3fsj20pn08wgnf.jpg" alt=""></p>
+<h3 id="二叉查找树"><a href="#二叉查找树" class="headerlink" title="二叉查找树"></a>二叉查找树</h3><p>二叉查找树是一种特殊的二叉树，相对较小的值保存在左节点中，较大的值保存在右节点中，这一特性使得查找的效率很高，对于数值型和非数值型数据，比如字母和字符串，都是如此。现在通过JS实现一个二叉查找树。</p>
+<h4 id="节点"><a href="#节点" class="headerlink" title="节点"></a>节点</h4><p>二叉树的最小元素是节点，所以先定义一个节点</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Node</span>(<span class="params">data,left,right</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.left = left;</span><br><span class="line">    <span class="keyword">this</span>.right = right;</span><br><span class="line">    <span class="keyword">this</span>.data = data;</span><br><span class="line">    <span class="keyword">this</span>.show = <span class="function"><span class="params">()</span> =&gt;</span> &#123;<span class="keyword">return</span> <span class="keyword">this</span>.data&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这个就是二叉树的最小结构单元</p>
+<h4 id="二叉树"><a href="#二叉树" class="headerlink" title="二叉树"></a>二叉树</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">BST</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.root = <span class="literal">null</span> <span class="comment">//初始化,root为null</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>BST初始化时，只有一个根节点，且没有任何数据。 接下来，我们利用二叉查找树的规则，定义一个插入方法，这个方法的基本思想是:</p>
+<ol>
+<li>如果<code>BST.root === null</code> ，那么就将节点作为根节点</li>
+<li>如果<code>BST.root !==null</code> ，将插入节点进行一个比较，小于根节点，拿到左边的节点，否则拿右边，再次比较、递归。</li>
+</ol>
+<p>这里就出现了递归了，因为，总是要把较小的放在靠左的分支。换言之</p>
+<p><strong>最左变的叶子节点是最小的数，最右的叶子节点是最大的数</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">insert</span>(<span class="params">data</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> node = <span class="keyword">new</span> Node(data,<span class="literal">null</span>,<span class="literal">null</span>);</span><br><span class="line">    <span class="keyword">if</span>(<span class="keyword">this</span>.root === <span class="literal">null</span>) &#123;</span><br><span class="line">        <span class="keyword">this</span>.root = node</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">var</span> current = <span class="keyword">this</span>.root;</span><br><span class="line">        <span class="keyword">var</span> parent;</span><br><span class="line">        <span class="keyword">while</span>(<span class="literal">true</span>) &#123;</span><br><span class="line">            parent = current;</span><br><span class="line">            <span class="keyword">if</span>(data &lt; current.data) &#123;</span><br><span class="line">                current = current.left; <span class="comment">//到左子树</span></span><br><span class="line">                <span class="keyword">if</span>(current === <span class="literal">null</span>) &#123;  <span class="comment">//如果左子树为空，说明可以将node插入在这里</span></span><br><span class="line">                    parent.left = node;</span><br><span class="line">                    <span class="keyword">break</span>;  <span class="comment">//跳出while循环</span></span><br><span class="line">                &#125;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                current = current.right;</span><br><span class="line">                <span class="keyword">if</span>(current === <span class="literal">null</span>) &#123;</span><br><span class="line">                    parent.right = node;</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这里，是使用了一个循环方法，不断的去向子树寻找正确的位置。 循环和递归都有一个核心，就是找到出口，这里的出口就是当current 为null的时候，代表没有内容，可以插入。</p>
+<p>接下来，将此方法写入BST即可:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">BST</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.root = <span class="literal">null</span>;</span><br><span class="line">    <span class="keyword">this</span>.insert = insert;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这样子，就可以使用二叉树这个自建的数据结构了:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> bst = <span class="keyword">new</span> BST()；</span><br><span class="line">bst.insert(<span class="number">10</span>);</span><br><span class="line">bst.insert(<span class="number">8</span>);</span><br><span class="line">bst.insert(<span class="number">2</span>);</span><br><span class="line">bst.insert(<span class="number">7</span>);</span><br><span class="line">bst.insert(<span class="number">5</span>);</span><br></pre></td></tr></table></figure>
+<p>但是这个时候，想要看树中的数据，不是那么清晰，所以接下来，就要用到遍历了。</p>
+<h4 id="二叉树的遍历"><a href="#二叉树的遍历" class="headerlink" title="二叉树的遍历"></a>二叉树的遍历</h4><p>我们知道，树的遍历主要包括</p>
+<ul>
+<li>前序遍历 (根左右)</li>
+<li>中序遍历 (左根右)</li>
+<li>后序遍历 (左右根)</li>
+</ul>
+<p>这个只是为了好记忆，我们拿下面的图做一个遍历</p>
+<p><img src="http://ww1.sinaimg.cn/large/6f9f3683ly1fug0jaukqpj209k057jrx.jpg" alt=""></p>
+<p>前序遍历: 56 22 10 30 81 77 92</p>
+<p>中序遍历: 10 22 30 56 77 81 92</p>
+<p>后序遍历: 10 30 22 77 92 81 56</p>
+<p>这里发现了一些规律：</p>
+<ol>
+<li>前序遍历，因为是根左右，所以最后一个一定是最大的； 第一个一定是root节点；</li>
+<li>中序遍历，在查找二叉树中，一定是从小到大的顺序； 根节点<code>56</code>左边(10/22/30)的一定是左子树的，右边的(77/81/92)一定是右子树的。</li>
+<li>后序遍历，根节点一定在最后</li>
+</ol>
+<h5 id="中序遍历的实现"><a href="#中序遍历的实现" class="headerlink" title="中序遍历的实现"></a>中序遍历的实现</h5><p>这里就又用到之前的递归了，中序遍历要求: <strong>左！根！右</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">inOrder</span>(<span class="params">node</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(node !== <span class="literal">null</span>) &#123;</span><br><span class="line">        <span class="comment">//如果不是null，就一直查找左变，因此递归</span></span><br><span class="line">        inOrder(node.left);</span><br><span class="line">        <span class="comment">//递归结束，打印当前值</span></span><br><span class="line">        <span class="built_in">console</span>.log(node.show());</span><br><span class="line">        <span class="comment">//上一次递归已经把左边搞完了，右边</span></span><br><span class="line">        inOrder(node.right);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//在刚才已有bst的基础上执行命令</span></span><br><span class="line">inOrder(bst.root);</span><br></pre></td></tr></table></figure>
+<p>通过递归，实现了中序遍历，上面打印出的结果如下:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">2</span><br><span class="line">5</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">10</span><br></pre></td></tr></table></figure>
+<h5 id="前序遍历-amp-后序遍历"><a href="#前序遍历-amp-后序遍历" class="headerlink" title="前序遍历&amp;后序遍历"></a>前序遍历&amp;后序遍历</h5><p>如果刚才的递归过程搞清楚，那这个就再简单不过了</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">preOrder</span>(<span class="params">node</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(node !== <span class="literal">null</span>) &#123;</span><br><span class="line">        <span class="comment">//根左右</span></span><br><span class="line">        <span class="built_in">console</span>.log(node.show());</span><br><span class="line">        preOrder(node.left);</span><br><span class="line">        preOrder(node.right);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>ok,趁热打铁，就把后序遍历的方法也一并写入，如下:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">postOrder</span>(<span class="params">node</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(node !== <span class="literal">null</span>) &#123;</span><br><span class="line">        <span class="comment">//左右根</span></span><br><span class="line">        postOrder(node.left);</span><br><span class="line">        postOrder(node.right);</span><br><span class="line">        <span class="built_in">console</span>.log(node.show())</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>好了，可以去尝试两种方法打印出来的结果了:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">preOrder(bst.root);</span><br><span class="line">postOrder(bst.root);</span><br></pre></td></tr></table></figure>
+<h3 id="二叉树的查找"><a href="#二叉树的查找" class="headerlink" title="二叉树的查找"></a>二叉树的查找</h3><p>在二叉树这种数据结构中进行数据查找是最方便的，现在我们就对查找最小值、最大值和特定值进行一个梳理：</p>
+<ul>
+<li>最小值： 最左子树的叶子节点</li>
+<li>最大值： 最右子树的叶子节点</li>
+<li>特定值： target与current进行比较，如果比current大，在current.right进行查找，反之类似。</li>
+</ul>
+<p>清楚思路后，就动手来写：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//最小值</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getMin</span>(<span class="params">bst</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> current = bst.root;</span><br><span class="line">    <span class="keyword">while</span>(current.left !== <span class="literal">null</span>) &#123;</span><br><span class="line">        current = current.left;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> current.data;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//最大值</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getMax</span>(<span class="params">bst</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> current = bst.root;</span><br><span class="line">    <span class="keyword">while</span>(current.right !== <span class="literal">null</span>) &#123;</span><br><span class="line">        current = current.right;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> current.data;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>最大、最小值都是非常简单的，下面主要看下如何通过</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">find</span>(<span class="params">target,bst</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> current = bst.root;</span><br><span class="line">    <span class="keyword">while</span>(current !== <span class="literal">null</span>) &#123;</span><br><span class="line">        <span class="keyword">if</span>(target === current.data) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span>(target &gt; current.data) &#123;</span><br><span class="line">            current = current.right;</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span>(target &lt; current.data) &#123;</span><br><span class="line">            current = current.left;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>其实核心，仍然是通过一个循环和判断，来不断的向下去寻找，这里的思想其实和二分查找是有点类似的。</p>
+<p>哇…</p>
+<p>没想到今天去整理排序 花了这么久…嗯..然而这篇文章已经够长了</p>
+<p>接下来我会把之前笔试遇到的题目和一些常用的算法问题，一一记录，前端很多算法都是和数组、字符串处理息息相关的，所以对正则表达式、数组常用方法的掌握也很重要，简单总结下知识点：</p>
+<ul>
+<li>正则表达式<ul>
+<li>字符串相关方法</li>
+<li>str.split()</li>
+<li>str.replace()</li>
+<li>str.match()</li>
+<li>reg.test()</li>
+<li>reg.exec()</li>
+</ul>
+</li>
+<li>数组方法<ul>
+<li>Array.map()  映射，有返回值，不改变数组本身</li>
+<li>Array.forEach() 遍历，无返回值</li>
+<li>Array.filter() 过滤，返回true时返回,false时不返回</li>
+<li>Array.splice/slice/join等</li>
+<li>for…of 遍历,iterator相关知识点</li>
+</ul>
+</li>
+</ul>
+<h3 id="未完待续…"><a href="#未完待续…" class="headerlink" title="未完待续…."></a>未完待续….</h3><p>内容会持续更新，最快的当然还是在github上，然后会同步到掘金，<a href="https://github.com/forrany/Web-Project" target="_blank" rel="noopener">github传送门</a></p>
+<h3 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h3><ol>
+<li><a href="https://blog.csdn.net/yushiyi6453/article/details/76407640" target="_blank" rel="noopener">排序算法时间复杂度、空间复杂度、稳定性比较</a></li>
+<li><a href="https://www.cnblogs.com/jsgnadsj/p/3458054.html" target="_blank" rel="noopener">算法学习记录–希尔排序</a></li>
+<li><a href="https://blog.csdn.net/tizzzzzz/article/details/79610375" target="_blank" rel="noopener">快速排序简单理解</a></li>
+<li><a href="https://book.douban.com/subject/25945449/" target="_blank" rel="noopener">数据结构与算法Javascript描述</a></li>
+</ol>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/前端面试/" <i="" class="fa fa-tag"> 前端面试</a>
+          
+            <a href="/tags/JavaScript/" <i="" class="fa fa-tag"> JavaScript</a>
+          
+            <a href="/tags/算法/" <i="" class="fa fa-tag"> 算法</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/08/15/2018-08-15-regular-expression/" rel="next" title="可能是最好的正则表达式教程的笔记">
+                <i class="fa fa-chevron-left"></i> 可能是最好的正则表达式教程的笔记
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/08/22/2018-08-22-how-react-works/" rel="prev" title="浅尝辄止,React是如何工作的">
+                浅尝辄止,React是如何工作的 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/taka.png" alt="Vincent Ko">
+            
+              <p class="site-author-name" itemprop="name">Vincent Ko</p>
+              <p class="site-description motion-element" itemprop="description">忧绪相伴，在浪漫的气息中回忆过去，敲着代码</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">20</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">29</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/forrany" title="GitHub &rarr; https://github.com/forrany" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="mailto:im.vincentko@gmail.com" title="E-Mail &rarr; mailto:im.vincentko@gmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://weibo.com/Vincent_Kooo" title="Weibo &rarr; https://weibo.com/Vincent_Kooo" rel="noopener" target="_blank"><i class="fa fa-fw fa-weibo"></i>Weibo</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://twitter.com/vincent_kooo" title="Twitter &rarr; https://twitter.com/vincent_kooo" rel="noopener" target="_blank"><i class="fa fa-fw fa-twitter"></i>Twitter</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                推荐阅读
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://wangyaxing.cn/" title="https://wangyaxing.cn/" rel="noopener" target="_blank">王亚星博客</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://reuixiy.github.io/" title="https://reuixiy.github.io/" rel="noopener" target="_blank">reuixiy</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://shenzekun.cn/" title="http://shenzekun.cn/" rel="noopener" target="_blank">moorez</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://richardcao.me/" title="https://richardcao.me/" rel="noopener" target="_blank">lifecycle</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#排序"><span class="nav-number">1.</span> <span class="nav-text">排序</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#基本排序算法"><span class="nav-number">1.1.</span> <span class="nav-text">基本排序算法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#冒泡排序"><span class="nav-number">1.1.1.</span> <span class="nav-text">冒泡排序</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#选择排序"><span class="nav-number">1.1.2.</span> <span class="nav-text">选择排序</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#插入排序"><span class="nav-number">1.1.3.</span> <span class="nav-text">插入排序</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#时间复杂度"><span class="nav-number">1.1.4.</span> <span class="nav-text">时间复杂度</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#高级排序算法"><span class="nav-number">1.2.</span> <span class="nav-text">高级排序算法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#快速排序"><span class="nav-number">1.2.1.</span> <span class="nav-text">快速排序</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#希尔排序"><span class="nav-number">1.2.2.</span> <span class="nav-text">希尔排序</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#时间复杂度总结"><span class="nav-number">1.2.3.</span> <span class="nav-text">时间复杂度总结</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#是否稳定"><span class="nav-number">1.2.3.1.</span> <span class="nav-text">是否稳定</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#辅助记忆"><span class="nav-number">1.2.3.2.</span> <span class="nav-text">辅助记忆</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#递归"><span class="nav-number">2.</span> <span class="nav-text">递归</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#实战例题"><span class="nav-number">2.1.</span> <span class="nav-text">实战例题</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Q1：Array数组的flat方法实现-2018网易雷火-amp-伏羲前端秋招笔试"><span class="nav-number">2.1.1.</span> <span class="nav-text">Q1：Array数组的flat方法实现(2018网易雷火&amp;伏羲前端秋招笔试)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Q2-实现简易版的co，自动执行generator"><span class="nav-number">2.1.2.</span> <span class="nav-text">Q2 实现简易版的co，自动执行generator</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Q3-爬楼梯问题"><span class="nav-number">2.1.3.</span> <span class="nav-text">Q3. 爬楼梯问题</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Q4-二分查找"><span class="nav-number">2.1.4.</span> <span class="nav-text">Q4.二分查找</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二叉树和二叉查找树"><span class="nav-number">3.</span> <span class="nav-text">二叉树和二叉查找树</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#树的基本概念"><span class="nav-number">3.1.</span> <span class="nav-text">树的基本概念</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二叉查找树"><span class="nav-number">3.2.</span> <span class="nav-text">二叉查找树</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#节点"><span class="nav-number">3.2.1.</span> <span class="nav-text">节点</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#二叉树"><span class="nav-number">3.2.2.</span> <span class="nav-text">二叉树</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#二叉树的遍历"><span class="nav-number">3.2.3.</span> <span class="nav-text">二叉树的遍历</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#中序遍历的实现"><span class="nav-number">3.2.3.1.</span> <span class="nav-text">中序遍历的实现</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#前序遍历-amp-后序遍历"><span class="nav-number">3.2.3.2.</span> <span class="nav-text">前序遍历&amp;后序遍历</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二叉树的查找"><span class="nav-number">3.3.</span> <span class="nav-text">二叉树的查找</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#未完待续…"><span class="nav-number">3.4.</span> <span class="nav-text">未完待续….</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参考资料"><span class="nav-number">3.5.</span> <span class="nav-text">参考资料</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Vincent Ko</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+    <span title="站点总字数">117k</span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    
+    <span title="站点阅读时长">3:33</span>
+  
+</div>
+
+
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.8.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v6.6.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    
+      
+  
+  <script color="135,127,127" opacity="0.5" zindex="-1" count="99" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script src="/lib/three/three.min.js"></script>
+  
+
+  
+  
+    <script src="/lib/three/three-waves.min.js"></script>
+  
+
+
+  
+
+
+  <script src="/js/src/utils.js?v=6.6.0"></script>
+
+  <script src="/js/src/motion.js?v=6.6.0"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/src/affix.js?v=6.6.0"></script>
+
+  <script src="/js/src/schemes/pisces.js?v=6.6.0"></script>
+
+
+
+  
+  <script src="/js/src/scrollspy.js?v=6.6.0"></script>
+<script src="/js/src/post-details.js?v=6.6.0"></script>
+
+
+
+  
+
+
+  <script src="/js/src/bootstrap.js?v=6.6.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  
+  
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+
+  <script>
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(function (item) {
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: true,
+        appId: '9z5cWwHgCpPYDuHc0wDVBrUM-gzGzoHsz',
+        appKey: 'rvAwm3XwE2eqCqQPRoVJcA12',
+        placeholder: 'Just go go',
+        avatar:'mm',
+        meta:guest,
+        pageSize:'10' || 10,
+        visitor: false
+    });
+  </script>
+
+
+
+
+  
+
+  <script>
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

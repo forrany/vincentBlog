@@ -1,0 +1,1448 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<link rel="manifest" href="/manifest.json">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=6.6.0" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/VK.png?v=6.6.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon32.png?v=6.6.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon16.png?v=6.6.0">
+
+
+  <link rel="mask-icon" href="/images/VK.svg?v=6.6.0" color="#222">
+
+
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '6.6.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="D3.js是一个基于HTML/SVG/CSS的数据可视化库，是领域内非常强大的存在了。 今后会在工作使用，也因此开始了自学之旅。学习过程中，我主要通过Curran Kelleher老师的系列教程进行学习，这个笔记用于学习、整理和分享，陆续学习、更新和记录中….  学习目的：  熟悉和认识D3.js 练习使用SVG画图，熟悉操作 练习D3.js的基本函数和操作  完成效果图：在线demo D3初印象">
+<meta name="keywords" content="d3.js,可视化,SVG">
+<meta property="og:type" content="article">
+<meta property="og:title" content="D3可视化：（1）初次见面，SVG与D3的魅力">
+<meta property="og:url" content="http://yoursite.com/2019/02/16/D3可视化之初印象/index.html">
+<meta property="og:site_name" content="VK Blog | 高闻灿的博客">
+<meta property="og:description" content="D3.js是一个基于HTML/SVG/CSS的数据可视化库，是领域内非常强大的存在了。 今后会在工作使用，也因此开始了自学之旅。学习过程中，我主要通过Curran Kelleher老师的系列教程进行学习，这个笔记用于学习、整理和分享，陆续学习、更新和记录中….  学习目的：  熟悉和认识D3.js 练习使用SVG画图，熟悉操作 练习D3.js的基本函数和操作  完成效果图：在线demo D3初印象">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/6f9f3683ly1g08p6oabibg205r05nmx4.gif">
+<meta property="og:image" content="http://ww1.sinaimg.cn/mw690/6f9f3683ly1g08ldlcwb6j20fm0e5q3a.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/mw690/6f9f3683ly1g08oa97tj2j20e00e8dgb.jpg">
+<meta property="og:updated_time" content="2019-02-16T16:05:28.842Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="D3可视化：（1）初次见面，SVG与D3的魅力">
+<meta name="twitter:description" content="D3.js是一个基于HTML/SVG/CSS的数据可视化库，是领域内非常强大的存在了。 今后会在工作使用，也因此开始了自学之旅。学习过程中，我主要通过Curran Kelleher老师的系列教程进行学习，这个笔记用于学习、整理和分享，陆续学习、更新和记录中….  学习目的：  熟悉和认识D3.js 练习使用SVG画图，熟悉操作 练习D3.js的基本函数和操作  完成效果图：在线demo D3初印象">
+<meta name="twitter:image" content="http://ww1.sinaimg.cn/large/6f9f3683ly1g08p6oabibg205r05nmx4.gif">
+
+
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/02/16/D3可视化之初印象/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>D3可视化：（1）初次见面，SVG与D3的魅力 | VK Blog | 高闻灿的博客</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion .logo-line-before i { left: initial; }
+    .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">VK Blog | 高闻灿的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">一个浪漫 | 有情调 | 文艺の | 小Coder</p>
+      
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>搜索</a>
+        </li>
+      
+    </ul>
+  
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+  
+  
+  
+  
+
+  
+
+    <a href="https://github.com/forrany" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewbox="0 0 250 250" style="fill: #222; color: #fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"/><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"/><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"/></svg></a>
+
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/16/D3可视化之初印象/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Vincent Ko">
+      <meta itemprop="description" content="忧绪相伴，在浪漫的气息中回忆过去，敲着代码">
+      <meta itemprop="image" content="/images/taka.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="VK Blog | 高闻灿的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">D3可视化：（1）初次见面，SVG与D3的魅力
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-02-16 20:15:24" itemprop="dateCreated datePublished" datetime="2019-02-16T20:15:24+08:00">2019-02-16</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-02-17 00:05:28" itemprop="dateModified" datetime="2019-02-17T00:05:28+08:00">2019-02-17</time>
+              
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/02/16/D3可视化之初印象/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2019/02/16/D3可视化之初印象/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                <span title="本文字数">6k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                <span title="阅读时长">11 分钟</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>D3.js是一个基于HTML/SVG/CSS的数据可视化库，是领域内非常强大的存在了。</p>
+<p>今后会在工作使用，也因此开始了自学之旅。学习过程中，我主要通过<a href="https://curran.github.io/dataviz-course-2018/" target="_blank" rel="noopener">Curran Kelleher</a>老师的系列教程进行学习，这个笔记用于学习、整理和分享，陆续学习、更新和记录中….</p>
+<hr>
+<p><strong>学习目的：</strong></p>
+<ul>
+<li>熟悉和认识D3.js</li>
+<li>练习使用SVG画图，熟悉操作</li>
+<li>练习D3.js的基本函数和操作</li>
+</ul>
+<p><strong>完成效果图：</strong><br><a href="https://forrany.github.io/Web-Project/D3js%E5%8F%AF%E8%A7%86%E5%8C%96/1.Smile%20face%20with%20D3js/" target="_blank" rel="noopener">在线demo</a><br><img src="http://ww1.sinaimg.cn/large/6f9f3683ly1g08p6oabibg205r05nmx4.gif" alt=""></p>
+<h2 id="D3初印象"><a href="#D3初印象" class="headerlink" title="D3初印象"></a>D3初印象</h2><h3 id="选择集"><a href="#选择集" class="headerlink" title="选择集"></a>选择集</h3><p>D3是实现数据可视化，仍然离不开传统DOM的选择和操作，也因此，D3提供了类似Jquery的DOM操作指令：</p>
+<ul>
+<li><code>d3.select</code>：选择第一个指定元素</li>
+<li><code>d3.selectAll</code> ： 选择所有的元素</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> svg = d3.select(<span class="string">'svg'</span>) <span class="comment">//选择svg</span></span><br><span class="line"><span class="keyword">const</span> p = svg.selectAll(<span class="string">'p'</span>) <span class="comment">//选择svg下所有的p标签</span></span><br></pre></td></tr></table></figure>
+<p>当然，可以使用<code>#id</code> 以及 <code>.class</code> 对id和类进行选择</p>
+<h4 id="查看状态"><a href="#查看状态" class="headerlink" title="查看状态"></a>查看状态</h4><p><code>d3.select</code>和<code>d3.selectAll</code>返回的都是选择集，添加、删除以及修改都需要用到选择集，查看状态有三个函数可以使用：</p>
+<ul>
+<li><code>selection.empty()</code>  选择集为空，返回true，否则返回false</li>
+<li><code>selection.node()</code> 返回第一个非空元素，如果选择集为空，返回null</li>
+<li><code>selection.size()</code> 返回选择集中的元素个数</li>
+</ul>
+<h4 id="设定和获取属性"><a href="#设定和获取属性" class="headerlink" title="设定和获取属性"></a>设定和获取属性</h4><p>使用<code>select</code>或<code>selectAll</code>选择后，可以通过<code>attr</code>获取和设定属性，可以使用<code>append</code>方法添加元素<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> svg = select(<span class="string">'svg'</span>);</span><br><span class="line">svg.append(<span class="string">'circle'</span>)</span><br><span class="line">    .attr(<span class="string">'r'</span>,<span class="string">'30'</span>)</span><br></pre></td></tr></table></figure></p>
+<h2 id="使用D3和SVG画图"><a href="#使用D3和SVG画图" class="headerlink" title="使用D3和SVG画图"></a>使用D3和SVG画图</h2><p>html文件<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">"en"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>Smile face with d3<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">svg</span> <span class="attr">width</span>=<span class="string">"960"</span> <span class="attr">height</span>=<span class="string">"500"</span>&gt;</span><span class="tag">&lt;/<span class="name">svg</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"https://d3js.org/d3.v5.min.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"index.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>主要内容通过index.js实现:</p>
+<h3 id="第一步：通过d3选择SVG，使用circle构建轮廓"><a href="#第一步：通过d3选择SVG，使用circle构建轮廓" class="headerlink" title="第一步：通过d3选择SVG，使用circle构建轮廓"></a>第一步：通过d3选择SVG，使用<code>circle</code>构建轮廓</h3><p><img src="http://ww1.sinaimg.cn/mw690/6f9f3683ly1g08ldlcwb6j20fm0e5q3a.jpg" alt=""></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> svg = d3.select(<span class="string">'svg'</span>);</span><br><span class="line"><span class="keyword">const</span> height = +svg.attr(<span class="string">'height'</span>);</span><br><span class="line"><span class="keyword">const</span> width = +svg.attr(<span class="string">'width'</span>);</span><br><span class="line">svg.append(<span class="string">'circle'</span>)</span><br><span class="line">    .attr(<span class="string">'r'</span>,height / <span class="number">2</span>)</span><br><span class="line">    .attr(<span class="string">'cx'</span>, width / <span class="number">2</span>)</span><br><span class="line">    .attr(<span class="string">'cy'</span>, height / <span class="number">2</span>)</span><br><span class="line">    .attr(<span class="string">'fill'</span>, <span class="string">'yellow'</span>)</span><br><span class="line">    .attr(<span class="string">'stroke'</span>,<span class="string">'black'</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> leftEye = svg.append(<span class="string">'circle'</span>)</span><br><span class="line">    .attr(<span class="string">'r'</span>, <span class="number">30</span>)</span><br><span class="line">    .attr(<span class="string">'cx'</span>, width / <span class="number">2</span> - <span class="number">100</span>)</span><br><span class="line">    .attr(<span class="string">'cy'</span>, height / <span class="number">2</span> - <span class="number">80</span>)</span><br><span class="line">    .attr(<span class="string">'fill'</span>, <span class="string">'black'</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> rightEye = svg.append(<span class="string">'circle'</span>)</span><br><span class="line">    .attr(<span class="string">'r'</span>, <span class="number">30</span>)</span><br><span class="line">    .attr(<span class="string">'cx'</span>, width / <span class="number">2</span> + <span class="number">100</span>)</span><br><span class="line">    .attr(<span class="string">'cy'</span>, height / <span class="number">2</span> - <span class="number">80</span>)</span><br><span class="line">    .attr(<span class="string">'fill'</span>, <span class="string">'black'</span>)</span><br></pre></td></tr></table></figure>
+<p>要点：</p>
+<ul>
+<li>通过<code>attr</code>获取的属性是<code>string</code>类型的，通过<code>parseFloat</code>或者<code>+</code>转换为<code>number</code>类型</li>
+<li>对圆形<code>circle</code>的属性<code>cx</code> <code>cy</code>等，使用变量作为其大小设置的值，而不用一个数字，方便日后的维护</li>
+<li>leftEye和RightEye用类似的方法，创造出来，并将眼睛放置在合适的位置。</li>
+</ul>
+<h4 id="代码优化"><a href="#代码优化" class="headerlink" title="代码优化"></a>代码优化</h4><p>1）可以发现，对三个圆圆心的操作<code>cx</code>和<code>cy</code>出现了多次，而作用也仅仅是为了将圆放在中心。因此，可以通过SVG中的<code>&lt;g&gt;</code>来分组来实现一次性操作。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> g = svg.append(<span class="string">'g'</span>)</span><br><span class="line">    .attr(<span class="string">'transform'</span>,<span class="string">`translate(<span class="subst">$&#123; width <span class="regexp">/ 2&#125;, $&#123; height /</span> <span class="number">2</span>&#125;</span>)`</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">//这样，在画圆的时候，就可以去掉对其圆心的操作，因为默认的位置就在中心了</span></span><br><span class="line"><span class="keyword">const</span> circle = g.append(<span class="string">'circle'</span>)</span><br><span class="line">    .attr(<span class="string">'r'</span>,height / <span class="number">2</span>)</span><br><span class="line">    .attr(<span class="string">'fill'</span>, <span class="string">'yellow'</span>)</span><br><span class="line">    .attr(<span class="string">'stroke'</span>,<span class="string">'black'</span>)</span><br></pre></td></tr></table></figure>
+<p>2）同样的，对于眼睛的操作，也有点繁琐，可以通过变量和分组，提高代码的可维护性能。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> eyeSpacing = <span class="number">100</span>;</span><br><span class="line"><span class="keyword">const</span> eyeYoffset = <span class="number">-80</span></span><br><span class="line"><span class="keyword">const</span> eyeRadius = <span class="number">30</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> eyesG = g.append(<span class="string">'g'</span>)</span><br><span class="line">    .attr(<span class="string">'transform'</span>, <span class="string">`translate(0, <span class="subst">$&#123;eyeYoffset&#125;</span>)`</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> leftEye = eyesG.append(<span class="string">'circle'</span>)</span><br><span class="line">    .attr(<span class="string">'r'</span>, eyeRadius)</span><br><span class="line">    .attr(<span class="string">'cx'</span>, - eyeSpacing)</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> rightEye = eyesG.append(<span class="string">'circle'</span>)</span><br><span class="line">    .attr(<span class="string">'r'</span>, eyeRadius)</span><br><span class="line">    .attr(<span class="string">'cx'</span>, + eyeSpacing)</span><br></pre></td></tr></table></figure></p>
+<h3 id="第二步-嘴巴"><a href="#第二步-嘴巴" class="headerlink" title="第二步 嘴巴"></a>第二步 嘴巴</h3><p><img src="http://ww1.sinaimg.cn/mw690/6f9f3683ly1g08oa97tj2j20e00e8dgb.jpg" alt=""></p>
+<p>嘴巴实际上是一个弧线，使用SVG中的<code>path</code>进行绘制。熟悉<code>path</code>的，当然可以直接给参数进行绘制，但是d3对圆弧有更好的支持，可以使用<code>d3.arc</code>函数，方便的绘制圆弧。</p>
+<h4 id="arc函数"><a href="#arc函数" class="headerlink" title="arc函数"></a>arc函数</h4><p>根据官方的API手册，函数的使用方法如下：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> arc = d3.arc();</span><br><span class="line"></span><br><span class="line">arc(&#123;</span><br><span class="line">  innerRadius: <span class="number">0</span>,</span><br><span class="line">  outerRadius: <span class="number">100</span>,</span><br><span class="line">  startAngle: <span class="number">0</span>,</span><br><span class="line">  endAngle: <span class="built_in">Math</span>.PI / <span class="number">2</span></span><br><span class="line">&#125;); <span class="comment">// "M0,-100A100,100,0,0,1,100,0L0,0Z"</span></span><br></pre></td></tr></table></figure></p>
+<p>其中，innerRadius是内圆半径，outerRadius是外圆半径，startAngle和endAngle分别是开始和结束的弧度（完整的圆是0~2PI）</p>
+<h4 id="笑脸的实现"><a href="#笑脸的实现" class="headerlink" title="笑脸的实现"></a>笑脸的实现</h4><p>根据以上内容，代码如下：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> mouth = g.append(<span class="string">'path'</span>)</span><br><span class="line">    .attr(<span class="string">'d'</span>,d3.arc()(&#123;</span><br><span class="line">        innerRadius: <span class="number">150</span>,</span><br><span class="line">        outerRadius: <span class="number">170</span>,</span><br><span class="line">        startAngle: <span class="built_in">Math</span>.PI /<span class="number">2</span>,</span><br><span class="line">        endAngle: <span class="built_in">Math</span>.PI * <span class="number">3</span> / <span class="number">2</span></span><br><span class="line">    &#125;))</span><br></pre></td></tr></table></figure></p>
+<h3 id="眉毛"><a href="#眉毛" class="headerlink" title="眉毛"></a>眉毛</h3><p>眉毛用简单的长方形来代替，也就是svg中的<code>&lt;rect&gt;</code>，使用前文的编程风格，将眉毛归为一个group，并将位置设定。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> eyebrowWidth = <span class="number">50</span>;</span><br><span class="line"><span class="keyword">const</span> eyebrowHeight = <span class="number">10</span>;</span><br><span class="line"><span class="keyword">const</span> eyebrowYoffset = <span class="number">-150</span>;</span><br><span class="line"><span class="keyword">const</span> BrowG = g.append(<span class="string">'g'</span>)</span><br><span class="line">    .attr(<span class="string">'transform'</span>,<span class="string">`translate(<span class="subst">$&#123;-eyebrowWidth <span class="regexp">/ 2&#125;,$&#123;eyebrowYoffset&#125;)`);</span></span></span></span><br><span class="line"><span class="string"><span class="subst"><span class="regexp"></span></span></span></span><br><span class="line"><span class="string"><span class="subst"><span class="regexp">const leftEyebrow = BrowG.append('rect')</span></span></span></span><br><span class="line"><span class="string"><span class="subst"><span class="regexp">    .attr('width',eyebrowWidth)</span></span></span></span><br><span class="line"><span class="string"><span class="subst"><span class="regexp">    .attr('height',eyebrowHeight)</span></span></span></span><br><span class="line"><span class="string"><span class="subst"><span class="regexp">    .attr('x',-eyeSpacing)</span></span></span></span><br><span class="line"><span class="string"><span class="subst"><span class="regexp"></span></span></span></span><br><span class="line"><span class="string"><span class="subst"><span class="regexp">const rightEyebrow = BrowG.append('rect')</span></span></span></span><br><span class="line"><span class="string"><span class="subst"><span class="regexp">    .attr('width', eyebrowWidth)</span></span></span></span><br><span class="line"><span class="string"><span class="subst"><span class="regexp">    .attr('height', eyebrowHeight)</span></span></span></span><br><span class="line"><span class="string"><span class="subst"><span class="regexp">    .attr('x', eyeSpacing)</span></span></span></span><br></pre></td></tr></table></figure></p>
+<h4 id="加入动画"><a href="#加入动画" class="headerlink" title="加入动画"></a>加入动画</h4><p>使用<code>transition</code>函数设置眉毛的动画，让笑脸动起来<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> BrowG = g.append(<span class="string">'g'</span>)</span><br><span class="line">    .attr(<span class="string">'transform'</span>,<span class="string">`translate(<span class="subst">$&#123;-eyebrowWidth <span class="regexp">/ 2&#125;,$&#123;eyebrowYoffset&#125;)`);</span></span></span></span><br><span class="line"><span class="string"><span class="subst"><span class="regexp">BrowG.transition().duration(2000)</span></span></span></span><br><span class="line"><span class="string"><span class="subst"><span class="regexp">    .attr('transform', `translate($&#123;-eyebrowWidth /</span> <span class="number">2</span>&#125;</span>,<span class="subst">$&#123;eyebrowYoffset - <span class="number">50</span>&#125;</span>)`</span>)</span><br><span class="line">    .transition().duration(<span class="number">2000</span>)</span><br><span class="line">    .attr(<span class="string">'transform'</span>, <span class="string">`translate(<span class="subst">$&#123;-eyebrowWidth <span class="regexp">/ 2&#125;,$&#123;eyebrowYoffset&#125;)`).duration(2000)</span></span></span></span><br></pre></td></tr></table></figure></p>
+<p><strong>注意点：</strong></p>
+<ul>
+<li><code>transition</code>函数要对号入座，即如果加在了<code>&lt;g&gt;</code>上，对应的增加的属性动画应该在<code>transform</code>上； 如果动画在<code>&lt;rect&gt;</code>上，动画应该在<code>y</code>属性上。</li>
+<li>添加动画不能在<code>append</code>函数之后连接，比如<code>BrowG.append(&#39;g&#39;).attr(...).transition()</code>是不行的。因为过度动画无法绑定在<code>append</code>的元素上，需要分别操作。</li>
+</ul>
+<h2 id="完整代码"><a href="#完整代码" class="headerlink" title="完整代码"></a>完整代码</h2><p><a href="https://github.com/forrany/Web-Project/blob/master/D3js%E5%8F%AF%E8%A7%86%E5%8C%96/1.Smile%20face%20with%20D3js/index.js" target="_blank" rel="noopener">code downlaod here</a></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> svg = d3.select(<span class="string">'svg'</span>);</span><br><span class="line"><span class="keyword">const</span> height = +svg.attr(<span class="string">'height'</span>);</span><br><span class="line"><span class="keyword">const</span> width = +svg.attr(<span class="string">'width'</span>);</span><br><span class="line"><span class="keyword">const</span> g = svg.append(<span class="string">'g'</span>)</span><br><span class="line">    .attr(<span class="string">'transform'</span>,<span class="string">`translate(<span class="subst">$&#123; width <span class="regexp">/ 2&#125;, $&#123; height /</span> <span class="number">2</span>&#125;</span>)`</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> circle = g.append(<span class="string">'circle'</span>)</span><br><span class="line">    .attr(<span class="string">'r'</span>,height / <span class="number">2</span>)</span><br><span class="line">    .attr(<span class="string">'fill'</span>, <span class="string">'yellow'</span>)</span><br><span class="line">    .attr(<span class="string">'stroke'</span>,<span class="string">'black'</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> eyeSpacing = <span class="number">100</span>;</span><br><span class="line"><span class="keyword">const</span> eyeYoffset = <span class="number">-80</span></span><br><span class="line"><span class="keyword">const</span> eyeRadius = <span class="number">30</span>;</span><br><span class="line"><span class="keyword">const</span> eyebrowWidth = <span class="number">50</span>;</span><br><span class="line"><span class="keyword">const</span> eyebrowHeight = <span class="number">10</span>;</span><br><span class="line"><span class="keyword">const</span> eyebrowYoffset = <span class="number">-150</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> eyesG = g.append(<span class="string">'g'</span>)</span><br><span class="line">    .attr(<span class="string">'transform'</span>, <span class="string">`translate(0, <span class="subst">$&#123;eyeYoffset&#125;</span>)`</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> leftEye = eyesG.append(<span class="string">'circle'</span>)</span><br><span class="line">    .attr(<span class="string">'r'</span>, eyeRadius)</span><br><span class="line">    .attr(<span class="string">'cx'</span>, - eyeSpacing)</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> rightEye = eyesG.append(<span class="string">'circle'</span>)</span><br><span class="line">    .attr(<span class="string">'r'</span>, eyeRadius)</span><br><span class="line">    .attr(<span class="string">'cx'</span>, + eyeSpacing)</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> mouth = g.append(<span class="string">'path'</span>)</span><br><span class="line">    .attr(<span class="string">'d'</span>,d3.arc()(&#123;</span><br><span class="line">        innerRadius: <span class="number">150</span>,</span><br><span class="line">        outerRadius: <span class="number">170</span>,</span><br><span class="line">        startAngle: <span class="built_in">Math</span>.PI /<span class="number">2</span>,</span><br><span class="line">        endAngle: <span class="built_in">Math</span>.PI * <span class="number">3</span> / <span class="number">2</span></span><br><span class="line">    &#125;))</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> BrowG = g.append(<span class="string">'g'</span>)</span><br><span class="line">    .attr(<span class="string">'transform'</span>,<span class="string">`translate(<span class="subst">$&#123;-eyebrowWidth <span class="regexp">/ 2&#125;,$&#123;eyebrowYoffset&#125;)`);</span></span></span></span><br><span class="line"><span class="string"><span class="subst"><span class="regexp">BrowG.transition().duration(2000)</span></span></span></span><br><span class="line"><span class="string"><span class="subst"><span class="regexp">    .attr('transform', `translate($&#123;-eyebrowWidth /</span> <span class="number">2</span>&#125;</span>,<span class="subst">$&#123;eyebrowYoffset - <span class="number">50</span>&#125;</span>)`</span>)</span><br><span class="line">    .transition().duration(<span class="number">2000</span>)</span><br><span class="line">    .attr(<span class="string">'transform'</span>, <span class="string">`translate(<span class="subst">$&#123;-eyebrowWidth <span class="regexp">/ 2&#125;,$&#123;eyebrowYoffset&#125;)`).duration(2000)</span></span></span></span><br><span class="line"><span class="string"><span class="subst"><span class="regexp"></span></span></span></span><br><span class="line"><span class="string"><span class="subst"><span class="regexp">const leftEyebrow = BrowG.append('rect')</span></span></span></span><br><span class="line"><span class="string"><span class="subst"><span class="regexp">    .attr('width',eyebrowWidth)</span></span></span></span><br><span class="line"><span class="string"><span class="subst"><span class="regexp">    .attr('height',eyebrowHeight)</span></span></span></span><br><span class="line"><span class="string"><span class="subst"><span class="regexp">    .attr('x',-eyeSpacing)</span></span></span></span><br><span class="line"><span class="string"><span class="subst"><span class="regexp"></span></span></span></span><br><span class="line"><span class="string"><span class="subst"><span class="regexp">const rightEyebrow = BrowG.append('rect')</span></span></span></span><br><span class="line"><span class="string"><span class="subst"><span class="regexp">    .attr('width', eyebrowWidth)</span></span></span></span><br><span class="line"><span class="string"><span class="subst"><span class="regexp">    .attr('height', eyebrowHeight)</span></span></span></span><br><span class="line"><span class="string"><span class="subst"><span class="regexp">    .attr('x', eyeSpacing)</span></span></span></span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/d3-js/" <i="" class="fa fa-tag"> d3.js</a>
+          
+            <a href="/tags/可视化/" <i="" class="fa fa-tag"> 可视化</a>
+          
+            <a href="/tags/SVG/" <i="" class="fa fa-tag"> SVG</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/01/14/折腾路由-Padavan私有云/" rel="next" title="折腾路由--Padavan私有云">
+                <i class="fa fa-chevron-left"></i> 折腾路由--Padavan私有云
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/03/09/基于Mjpg-Streamer与树莓派的监控与拍照/" rel="prev" title="Mjpg-Streamer+Node.js实现在树莓派上的监控与拍照">
+                Mjpg-Streamer+Node.js实现在树莓派上的监控与拍照 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/taka.png" alt="Vincent Ko">
+            
+              <p class="site-author-name" itemprop="name">Vincent Ko</p>
+              <p class="site-description motion-element" itemprop="description">忧绪相伴，在浪漫的气息中回忆过去，敲着代码</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">20</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">29</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/forrany" title="GitHub &rarr; https://github.com/forrany" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="mailto:im.vincentko@gmail.com" title="E-Mail &rarr; mailto:im.vincentko@gmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://weibo.com/Vincent_Kooo" title="Weibo &rarr; https://weibo.com/Vincent_Kooo" rel="noopener" target="_blank"><i class="fa fa-fw fa-weibo"></i>Weibo</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://twitter.com/vincent_kooo" title="Twitter &rarr; https://twitter.com/vincent_kooo" rel="noopener" target="_blank"><i class="fa fa-fw fa-twitter"></i>Twitter</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                推荐阅读
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://wangyaxing.cn/" title="https://wangyaxing.cn/" rel="noopener" target="_blank">王亚星博客</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://reuixiy.github.io/" title="https://reuixiy.github.io/" rel="noopener" target="_blank">reuixiy</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://shenzekun.cn/" title="http://shenzekun.cn/" rel="noopener" target="_blank">moorez</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://richardcao.me/" title="https://richardcao.me/" rel="noopener" target="_blank">lifecycle</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#D3初印象"><span class="nav-number">1.</span> <span class="nav-text">D3初印象</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#选择集"><span class="nav-number">1.1.</span> <span class="nav-text">选择集</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#查看状态"><span class="nav-number">1.1.1.</span> <span class="nav-text">查看状态</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#设定和获取属性"><span class="nav-number">1.1.2.</span> <span class="nav-text">设定和获取属性</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用D3和SVG画图"><span class="nav-number">2.</span> <span class="nav-text">使用D3和SVG画图</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#第一步：通过d3选择SVG，使用circle构建轮廓"><span class="nav-number">2.1.</span> <span class="nav-text">第一步：通过d3选择SVG，使用circle构建轮廓</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#代码优化"><span class="nav-number">2.1.1.</span> <span class="nav-text">代码优化</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第二步-嘴巴"><span class="nav-number">2.2.</span> <span class="nav-text">第二步 嘴巴</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#arc函数"><span class="nav-number">2.2.1.</span> <span class="nav-text">arc函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#笑脸的实现"><span class="nav-number">2.2.2.</span> <span class="nav-text">笑脸的实现</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#眉毛"><span class="nav-number">2.3.</span> <span class="nav-text">眉毛</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#加入动画"><span class="nav-number">2.3.1.</span> <span class="nav-text">加入动画</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#完整代码"><span class="nav-number">3.</span> <span class="nav-text">完整代码</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Vincent Ko</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+    <span title="站点总字数">117k</span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    
+    <span title="站点阅读时长">3:33</span>
+  
+</div>
+
+
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.8.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v6.6.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    
+      
+  
+  <script color="135,127,127" opacity="0.5" zindex="-1" count="99" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script src="/lib/three/three.min.js"></script>
+  
+
+  
+  
+    <script src="/lib/three/three-waves.min.js"></script>
+  
+
+
+  
+
+
+  <script src="/js/src/utils.js?v=6.6.0"></script>
+
+  <script src="/js/src/motion.js?v=6.6.0"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/src/affix.js?v=6.6.0"></script>
+
+  <script src="/js/src/schemes/pisces.js?v=6.6.0"></script>
+
+
+
+  
+  <script src="/js/src/scrollspy.js?v=6.6.0"></script>
+<script src="/js/src/post-details.js?v=6.6.0"></script>
+
+
+
+  
+
+
+  <script src="/js/src/bootstrap.js?v=6.6.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  
+  
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+
+  <script>
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(function (item) {
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: true,
+        appId: '9z5cWwHgCpPYDuHc0wDVBrUM-gzGzoHsz',
+        appKey: 'rvAwm3XwE2eqCqQPRoVJcA12',
+        placeholder: 'Just go go',
+        avatar:'mm',
+        meta:guest,
+        pageSize:'10' || 10,
+        visitor: false
+    });
+  </script>
+
+
+
+
+  
+
+  <script>
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
