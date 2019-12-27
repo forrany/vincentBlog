@@ -239,7 +239,60 @@ window.addEventListener('message', event => {
 
 [2. iframe代理方法](https://www.jianshu.com/p/9d90d3333215)
 
+#### notebook功能模块
 
+核心功能模块的目录为
+  - 编辑器相关功能 `/notebook/notebook/static/edit/js`
+  - notebook功能模块 `/notebook/notebook/static/notebook/js`
+
+其中编辑器包含了导航栏、编辑器功能板的动态页面生成以及相关action的调用； 
+notebook的功能模块，则囊括了整个jupyter-notebook的各项基础功能，包括自动保存、自动保存配置、编辑器状态、事件注册等。
+
+##### notebook.js
+
+在notebook目录下，`notebook.js`定义了Notebook的类，可以将其看作项目的容器，将各基础模块和功能集成并接入进来，这里举一个简单的例子。
+
+比如编辑器的自动保存功能，notebook的属性上有
+  - `autosave_interval`
+
+可以配置自动保存的事件间隔，默认为2分钟。
+
+---
+**实例解释**
+
+又比如在iframe嵌套jupyter-notebook中，外层想要获取编辑器状态，避免在为保存状态下刷新。
+
+编辑器的未保存状态刷新，其本身是有保护机制的，在源码中，使用一下子方法做了处理
+```js
+window.onbeforeunload = function() {
+  ...
+}
+
+```
+但是，该方法是在外部刷新iframe时才会触发，现在想要外部去调用内部刷新前，就先判断是否可刷新，并给出更友好的提示。
+
+这样开发思路可以为： 
+  1. 外部通过`postMessage`查询iframe(notebook)的状态，询问是否可刷新
+  2. 内部监听`message`，并根据编辑状态返回信息
+  3. 外部拿到编辑器状态，决定是否刷新，并提示用户。
+
+这样，问题就简化成了，获取编辑器状态即可，编辑器状态在`Notebook`的`dirty`属性上,当该属性为 `true`时，表示当前编辑器未保存。
+
+因此，在Notebook.js中可以加入以下代码： 
+```js
+  //...
+  window.addEventListener('message', event => {
+    if (event.data.eventType === 'getEditStatus') {
+      window.top.postMessage({
+        status: that.dirty,
+        eventType: 'editStatus'
+      }, '*')
+    }
+  })
+
+```
+
+同理，父级也只需要通过`postMessage`实现通讯，即可根据状态信息，完成二次开发，给出更友好的提示。
 
 其他的模块、内容类似，等之后深入研究后，继续补充前端二次开发的踩坑经历。
 
